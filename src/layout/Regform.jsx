@@ -31,7 +31,8 @@ export default function Regform() {
             <div className='flex text-3xl font-bold p-3  justify-center'>
                 <h1>Register</h1>
             </div>
-            <div className='flex gap-2 border justify-center'>
+            <div className='flex gap-2 justify-center'>
+            <div className='border rounded-md p-3 '>
                 <form onSubmit={hdlSubmit}> 
                     <label className="form-control w-full max-w-xs">
                         <div className="label pl-20">
@@ -86,6 +87,7 @@ export default function Regform() {
                         </div>
                     </label>
                 </form>
+                </div>
             </div>
         </>
     )

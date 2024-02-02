@@ -27,7 +27,8 @@ export default function Logform() {
             <div className='flex text-3xl font-bold p-3  justify-center'>
                 <h1>Login</h1>
             </div>
-            <div className='flex border justify-center'>
+            <div className='flex justify-center'>
+                <div className='border rounded-md p-3'>
                 <form onSubmit={hdlSubmit}>
                     <label className="form-control w-full max-w-xs">
                         <div className="label pl-20">
@@ -60,6 +61,7 @@ export default function Logform() {
                         </div>
                     </label>
                 </form>
+                </div>
             </div>
         </>
     )
