@@ -1,10 +1,12 @@
 import Regform from "./layout/regform"
 import Logform from "./layout/Logform"
+import Nav from "./layout/nav"
 
 function App() {
 
   return (
     <>
+      <Nav />
       <div data-theme="" className='flex border p-10 justify-center'>
         <label className="swap swap-rotate">
 
@@ -20,8 +22,8 @@ function App() {
         </label>
         <hr />
       </div>
-        <Logform />
-        {/* <Regform /> */}
+      <Logform />
+      <Regform />
     </>
   )
 }
