@@ -32,8 +32,14 @@ function AuthContextProvider(props) {
         }
         run()
     }, [])
+
+    const logout = () => {
+      setUser(null)
+      localStorage.removeItem("token");
+  }
+
     return (
-        <AuthContext.Provider value={{ user, setUser, loading }}>
+        <AuthContext.Provider value={{ user, setUser, loading, logout }}>
             {props.children}
         </AuthContext.Provider>
     )

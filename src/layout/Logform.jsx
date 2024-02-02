@@ -16,17 +16,20 @@ export default function Logform() {
     const hdlSubmit = async e => {
         try {
             e.preventDefault()
-            const rs = await axios.post('http://localhost:3000/auth/login', input)
+            const rs = await axios.post("http://localhost:3000/auth/login", input)
             console.log(rs.data.token)
-            const rs1 = await axios.get('http://localhost:3000/auth/me', {
-                headers: { Authorization: `Bearer ${rs.data.token}` }
+            localStorage.setItem("token",rs.data.token)
+            const localtoken = localStorage.getItem("token");
+            const rs1 = await axios.get("http://localhost:3000/auth/me",{
+                headers: { Authorization : `Bearer ${localtoken}` }
             })
+            delete rs1.data.Password
             console.log(rs1.data)
             setUser(rs1.data)
         } catch (err) {
             console.log(err.message)
         }
-
+        
     }
 
     return (
