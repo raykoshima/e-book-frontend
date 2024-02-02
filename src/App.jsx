@@ -21,7 +21,7 @@ function App() {
         <hr />
       </div>
         <Logform />
-        <Regform />
+        {/* <Regform /> */}
     </>
   )
 }
