@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { useState,useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Regform() {
     const [input , setInput] = useState({
@@ -81,8 +82,8 @@ export default function Regform() {
 
                         <div className='label flex'>
                             <div className='flex gap-3'>
-                                <a className="link link-hover">Do you want to login?</a>
-                                <button className="btn">Register</button>
+                            <Link to="/">Do you want to login?</Link>
+                                <button className="btn">Sign Up</button>
                             </div>
                         </div>
                     </label>

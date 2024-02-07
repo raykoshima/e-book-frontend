@@ -4,6 +4,7 @@ import Regform from '../layout/regform'
 import useAuth from '../Hooks/useAuth'
 import Header from '../layout/Header'
 import Userhome from '../layout/Userhome'
+import Dashboard from '../layout/Dashboard'
 
 const guestRouter = createBrowserRouter([
     {
@@ -27,7 +28,7 @@ const userRouter = createBrowserRouter([
             <Outlet />
         </>,
         children: [
-            { index: true, element: <p>User Home / Dashboard</p> },
+            { index: true, element: <Dashboard/> },
             { path: '/new', element: <Userhome/> }
         ]
     }

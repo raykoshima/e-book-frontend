@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import useAuth from '../Hooks/useAuth'
+import { Link } from 'react-router-dom'
 
 export default function Logform() {
     const { setUser } = useAuth()
@@ -18,10 +19,10 @@ export default function Logform() {
             e.preventDefault()
             const rs = await axios.post("http://localhost:3000/auth/login", input)
             console.log(rs.data.token)
-            localStorage.setItem("token",rs.data.token)
+            localStorage.setItem("token", rs.data.token)
             const localtoken = localStorage.getItem("token");
-            const rs1 = await axios.get("http://localhost:3000/auth/me",{
-                headers: { Authorization : `Bearer ${localtoken}` }
+            const rs1 = await axios.get("http://localhost:3000/auth/me", {
+                headers: { Authorization: `Bearer ${localtoken}` }
             })
             delete rs1.data.Password
             console.log(rs1.data)
@@ -29,7 +30,7 @@ export default function Logform() {
         } catch (err) {
             console.log(err.message)
         }
-        
+
     }
 
     return (
@@ -65,7 +66,7 @@ export default function Logform() {
 
                             <div className='label flex'>
                                 <div className='flex gap-3'>
-                                    <a className="link link-hover">Don't have an account?</a>
+                                    <Link to="/register">Don't have an account?</Link>
                                     <button className="btn" onChange={hdlSubmit}>Login</button>
                                 </div>
                             </div>
