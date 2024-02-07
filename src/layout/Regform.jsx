@@ -29,11 +29,11 @@ export default function Regform() {
 
     return (
         <>
-            <div className='flex text-3xl font-bold p-3  justify-center'>
-                <h1>Register</h1>
+            <div className='flex text-3xl font-bold p-3 justify-center bg-gray-800 text-white'>
+                <h1>สมัครสมาชิก</h1>
             </div>
-            <div className='flex gap-2 justify-center'>
-            <div className='border rounded-md p-3 '>
+            <div className='flex gap-2 justify-center bg-gray-800'>
+            <div className='rounded-md p-10 bg-white'>
                 <form onSubmit={hdlSubmit}> 
                     <label className="form-control w-full max-w-xs">
                         <div className="label pl-20">
@@ -41,7 +41,7 @@ export default function Regform() {
 
                         <div className="join flex items-center">
                             <label className="btn join-item"><i className="fa-solid fa-user"></i></label>
-                            <input className="input input-bordered join-item" placeholder="Username" 
+                            <input className="input input-bordered join-item" placeholder="ชื่อผู้ใช้" 
                             name="username" 
                             value={input.username} 
                             onChange={ hdlChange } />
@@ -52,7 +52,7 @@ export default function Regform() {
 
                         <div className="join flex items-center">
                             <label className="btn join-item"><i className="fa-solid fa-envelope"></i></label>
-                            <input className="input input-bordered join-item" placeholder="Email" 
+                            <input className="input input-bordered join-item" placeholder="อีเมล" 
                             name="email" 
                             value={input.email}
                             onChange={ hdlChange } />
@@ -63,7 +63,7 @@ export default function Regform() {
 
                         <div className="join flex items-center">
                             <label className="btn join-item"><i className="fa-solid fa-lock"></i></label>
-                            <input className="input input-bordered join-item" placeholder="Password" type="password"
+                            <input className="input input-bordered join-item" placeholder="รหัสผ่าน" type="password"
                             name="password"
                             value={input.password}
                             onChange={ hdlChange } />
@@ -74,16 +74,16 @@ export default function Regform() {
 
                         <div className="join flex items-center">
                             <label className="btn join-item"><i className="fa-solid fa-unlock"></i></label>
-                            <input className="input input-bordered join-item" placeholder="Confirm Password" type="password"
+                            <input className="input input-bordered join-item" placeholder="ยืนยันรหัสผ่าน" type="password"
                             name="confirmPassword"
                             value={input.confirmPassword}
                             onChange={ hdlChange } />
                         </div>
 
-                        <div className='label flex'>
+                        <div className='label flex justify-center'>
                             <div className='flex gap-3'>
-                            <Link to="/">Do you want to login?</Link>
-                                <button className="btn">Sign Up</button>
+                            <Link to="/">คุณต้องการที่จะเข้าสู่ระบบ</Link>
+                                <button className="btn">สมัคร</button>
                             </div>
                         </div>
                     </label>

@@ -35,11 +35,11 @@ export default function Logform() {
 
     return (
         <>
-            <div className='flex text-3xl font-bold p-3  justify-center'>
-                <h1>Login</h1>
+            <div className='flex text-3xl font-bold p-3 justify-center bg-gray-800 text-white'>
+                <h1>เข้าสู่ระบบ</h1>
             </div>
-            <div className='flex justify-center'>
-                <div className='border rounded-md p-3'>
+            <div className='flex justify-center bg-gray-800'>
+                <div className='rounded-md p-10 bg-white'>
                     <form onSubmit={hdlSubmit}>
                         <label className="form-control w-full max-w-xs">
                             <div className="label pl-20">
@@ -47,7 +47,7 @@ export default function Logform() {
 
                             <div className="join flex items-center">
                                 <label className="btn join-item"><i className="fa-solid fa-user"></i></label>
-                                <input className="input input-bordered join-item" placeholder="Username"
+                                <input className="input input-bordered join-item" placeholder="ชื่อผู้ใช้"
                                     name="username"
                                     value={input.username}
                                     onChange={hdlChange} />
@@ -58,16 +58,16 @@ export default function Logform() {
 
                             <div className="join flex items-center">
                                 <label className="btn join-item"><i className="fa-solid fa-lock"></i></label>
-                                <input className="input input-bordered join-item" placeholder="Password" type="password"
+                                <input className="input input-bordered join-item" placeholder="รหัสผ่าน" type="password"
                                     name="password"
                                     value={input.password}
                                     onChange={hdlChange} />
                             </div>
 
-                            <div className='label flex'>
+                            <div className='label flex justify-center'>
                                 <div className='flex gap-3'>
-                                    <Link to="/register">Don't have an account?</Link>
-                                    <button className="btn" onChange={hdlSubmit}>Login</button>
+                                    <Link to="/register">คุณต้องการสมัครบัญชี</Link>
+                                    <button className="btn" onChange={hdlSubmit}>เข้าสู่ระบบ</button>
                                 </div>
                             </div>
                         </label>

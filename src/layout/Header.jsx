@@ -4,12 +4,12 @@ import useAuth from '../Hooks/useAuth';
 
 const guestNav = [
   // { to : '/', text: 'Login' },
-  { to: '/register', text: 'Sign Up' },
+  { to: '/register', text: 'สมัครสมาชิก' },
 ];
 
 const userNav = [
-  { to: '/', text: 'Home' },
-  { to: '/new', text: 'New Todo' },
+  { to: '/', text: 'หน้าหลัก' },
+  { to: '/new', text: 'รายการหนังสือที่ยืม' },
 ];
 
 export default function Header() {
@@ -37,7 +37,7 @@ export default function Header() {
             ))}
             {user?.id && (
               <li>
-                <button onClick={hdlLogout} className="block px-4 py-2 text-sm text-gray-800 hover:bg-red-200">Logout</button>
+                <button onClick={hdlLogout} className="block px-4 py-2 text-sm text-gray-800 hover:bg-red-200">ออกจากระบบ</button>
               </li>
             )}
           </ul>
@@ -45,7 +45,7 @@ export default function Header() {
       </div>
       <div className="navbar-center">
         <a className="btn btn-ghost text-xl">
-          {user?.id ? `Hello, ${user.Username}` : <span className="font-bold text-2xl">Library</span>}
+          {user?.id ? `ยินดีต้อนรับ, ${user.display}` : <span className="font-bold text-1xl">วิทยาลัยเทคนิคขอนแก่น</span>}
         </a>
       </div>
       <div className="navbar-end">

@@ -27,17 +27,17 @@ export default function UserHome() {
                 <table className="table-auto w-full border-collapse">
                     <thead>
                         <tr>
-                            <th className="px-6 py-3 bg-gray-100 text-gray-800">Image</th>
-                            <th className="px-6 py-3 bg-gray-100 text-gray-800">Title</th>
-                            <th className="px-6 py-3 bg-gray-100 text-gray-800">Created At</th>
-                            <th className="px-6 py-3 bg-gray-100 text-gray-800">Due Date</th>
-                            <th className="px-6 py-3 bg-gray-100 text-gray-800">Status</th>
+                            <th className="px-6 py-3 bg-gray-100 text-gray-800">รูปภาพ</th>
+                            <th className="px-6 py-3 bg-gray-100 text-gray-800">ชื่อหนังสือ</th>
+                            <th className="px-6 py-3 bg-gray-100 text-gray-800">วันที่ยืม</th>
+                            <th className="px-6 py-3 bg-gray-100 text-gray-800">ส่งคืน</th>
+                            <th className="px-6 py-3 bg-gray-100 text-gray-800">สถานะ</th>
                         </tr>
                     </thead>
                     <tbody>
                         {todos.length === 0 ? (
                             <tr>
-                                <td colSpan="5" className="px-6 py-4 text-center italic">There is no data in the list.</td>
+                                <td colSpan="5" className="px-6 py-4 text-center italic">ไม่มีข้อมูลในรายการ</td>
                             </tr>
                         ) : (
                             todos.map(todo => (
@@ -47,7 +47,7 @@ export default function UserHome() {
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">{todo.Title}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">{new Date(todo.createdAt).toLocaleString()}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{new Date(todo.Duedate).toLocaleDateString()}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-red-500">{new Date(todo.Duedate).toLocaleDateString()}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">{todo.Status}</td>
                                 </tr>
                             ))
