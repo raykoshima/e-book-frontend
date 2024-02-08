@@ -14,24 +14,35 @@ export default function Logform() {
         setInput(prv => ({ ...prv, [e.target.name]: e.target.value }))
     }
 
+    const [error, setError] = useState('');
+    const validateForm = () => {
+        if (!input.username.trim() || !input.password.trim()) {
+            setError('โปรดกรอกชื่อผู้ใช้และรหัสผ่าน');
+            return false;
+        }
+        setError('');
+        return true;
+    };
+
     const hdlSubmit = async e => {
         try {
-            e.preventDefault()
-            const rs = await axios.post("http://localhost:3000/auth/login", input)
-            console.log(rs.data.token)
-            localStorage.setItem("token", rs.data.token)
+            e.preventDefault();
+            if (!validateForm()) return; // ตรวจสอบความถูกต้องของฟอร์มก่อนที่จะส่งคำขอ
+
+            const rs = await axios.post("http://localhost:3000/auth/login", input);
+            console.log(rs.data.token);
+            localStorage.setItem("token", rs.data.token);
             const localtoken = localStorage.getItem("token");
             const rs1 = await axios.get("http://localhost:3000/auth/me", {
                 headers: { Authorization: `Bearer ${localtoken}` }
-            })
-            delete rs1.data.Password
-            console.log(rs1.data)
-            setUser(rs1.data)
+            });
+            delete rs1.data.Password;
+            console.log(rs1.data);
+            setUser(rs1.data);
         } catch (err) {
-            console.log(err.message)
+            console.log(err.message);
         }
-
-    }
+    };
 
     return (
         <>
@@ -62,6 +73,10 @@ export default function Logform() {
                                     name="password"
                                     value={input.password}
                                     onChange={hdlChange} />
+                            </div>
+
+                            <div className="join flex items-center">
+                                {error && <div className="text-red-500">{error}</div>}
                             </div>
 
                             <div className='label flex justify-center'>
