@@ -37,10 +37,10 @@ export default function Regform() {
             const rs = await axios.post('http://localhost:3000/auth/register', input);
             console.log(rs);
             if (rs.status === 200) {
-                alert(rs.data);
+                // alert(rs.data);
                 setTimeout(() => {
                     window.location.href = '/';
-                }, 500);
+                }, 1000);
             }
         } catch (err) {
             console.log(err.message);
