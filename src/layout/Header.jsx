@@ -9,8 +9,8 @@ const guestNav = [
 
 const userNav = [
   { to: '/', text: 'หน้าหลัก' },
-  { to: '/profile', text: 'โปรไฟล์' },
   { to: '/new', text: 'รายการหนังสือที่ยืม' },
+  { to: '/profile', text: 'โปรไฟล์' },
 ];
 
 export default function Header() {
@@ -51,11 +51,11 @@ export default function Header() {
       </div>
       <div className="navbar-end">
         {user?.id ? (
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+          <Link to="/profile" tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
               <img alt="User avatar" src={user.avatar} />
             </div>
-          </div>
+          </Link>
         ) : (
           <>
             <button className="btn btn-ghost btn-circle">
