@@ -66,7 +66,7 @@ function UserProfile() {
                                 </label>
                             </div>
                             <div className="md:w-2/3">
-                                <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" type="text" />
+                                <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="username" required/>
                             </div>
                         </div>
                         <div className="md:flex md:items-center mb-3">
@@ -76,7 +76,7 @@ function UserProfile() {
                                 </label>
                             </div>
                             <div className="md:w-2/3">
-                                <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" type="text" />
+                                <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="display name" required/>
                             </div>
                         </div>
                         <div className="md:flex md:items-center mb-3">
@@ -86,7 +86,7 @@ function UserProfile() {
                                 </label>
                             </div>
                             <div className="md:w-2/3">
-                                <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-whit" type="text" />
+                                <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" type="email" placeholder="email" required />
                             </div>
                         </div>
                         <div className="md:flex md:items-center mb-3">
@@ -96,13 +96,13 @@ function UserProfile() {
                                 </label>
                             </div>
                             <div className="md:w-2/3">
-                                <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" type="password" placeholder="******************" />
+                                <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" type="password" placeholder="password" required />
                             </div>
                         </div>
                         <div className="md:flex md:items-center">
                             <div className="md:w-1/3"></div>
                             <div className="md:w-2/3">
-                                <button className="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
+                                <button className="shadow bg-gray-500 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
                                     บันทึกข้อมูล
                                 </button>
                             </div>
