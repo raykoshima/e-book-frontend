@@ -49,7 +49,7 @@ export default function Regform() {
 
 
     return (
-        <>
+   <>
             <div className='flex text-3xl font-bold pt-20 justify-center bg-gray-800 text-white'>
                 <h1>สมัครสมาชิก</h1>
             </div>
@@ -130,7 +130,6 @@ export default function Regform() {
                     <p>3.3 ในกรณีที่สมาชิกละเมิด ฝ่าฝืน และไม่ปฎิบัติตามเงื่อนไขการให้บริการ</p>
                 </div>
             </div>
-
         </>
     )
 }
