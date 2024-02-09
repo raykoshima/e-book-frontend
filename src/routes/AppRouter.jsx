@@ -5,6 +5,7 @@ import useAuth from '../Hooks/useAuth'
 import Header from '../layout/Header'
 import Userhome from '../layout/Userhome'
 import Dashboard from '../layout/Dashboard'
+import UserProfile from '../layout/UserProfile'
 
 const guestRouter = createBrowserRouter([
     {
@@ -29,10 +30,12 @@ const userRouter = createBrowserRouter([
         </>,
         children: [
             { index: true, element: <Dashboard/> },
-            { path: '/new', element: <Userhome/> }
+            { path: '/new', element: <Userhome/> },
+            { path: '/profile', element: <UserProfile/> },
         ]
     }
 ])
+
 
 export default function AppRouter() {
     const {user} = useAuth()

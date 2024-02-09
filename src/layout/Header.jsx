@@ -9,6 +9,7 @@ const guestNav = [
 
 const userNav = [
   { to: '/', text: 'หน้าหลัก' },
+  { to: '/profile', text: 'โปรไฟล์' },
   { to: '/new', text: 'รายการหนังสือที่ยืม' },
 ];
 
@@ -45,7 +46,7 @@ export default function Header() {
       </div>
       <div className="navbar-center">
         <a className="btn btn-ghost text-xl">
-          {user?.id ? `ยินดีต้อนรับ, ${user.display}` : <span className="font-bold text-1xl">วิทยาลัยเทคนิคขอนแก่น</span>}
+          {user?.id ? `ยินดีต้อนรับ, ${user.display}` : <span className="font-bold text-1xl flex gap-2"><img src="https://www.kktech.ac.th/files/bigsize_10000001_21101520200238.jpg" alt="" width="30" height="24"/>วิทยาลัยเทคนิคขอนแก่น</span>}
         </a>
       </div>
       <div className="navbar-end">
