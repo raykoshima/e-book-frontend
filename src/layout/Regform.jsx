@@ -2,6 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { Link, redirect } from 'react-router-dom'
+import Swal from 'sweetalert2';
 
 export default function Regform() {
     const [input, setInput] = useState({
@@ -32,30 +33,37 @@ export default function Regform() {
     const hdlSubmit = async e => {
         try {
             e.preventDefault();
-            if (!validateForm()) return; // ตรวจสอบความถูกต้องของฟอร์มก่อนที่จะส่งคำขอ
+            if (!validateForm()) return;
 
             const rs = await axios.post('http://localhost:3000/auth/register', input);
             console.log(rs);
             if (rs.status === 200) {
-                // alert(rs.data);
-                setTimeout(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registration Successful',
+                    text: 'คุณลงทะเบียนสำเร็จแล้ว!'
+                }).then(() => {
                     window.location.href = '/';
-                }, 1000);
+                });
             }
         } catch (err) {
             console.log(err.message);
+            Swal.fire({
+                icon: 'error',
+                title: 'Registration Failed',
+                text: 'เกิดข้อผิดพลาดระหว่างการลงทะเบียน กรุณาลองใหม่อีกครั้งในภายหลัง.'
+            });
         }
     };
 
-
     return (
-   <>
+        <>
             <div className='flex text-3xl font-bold pt-20 justify-center bg-gray-800 text-white'>
                 <h1>สมัครสมาชิก</h1>
             </div>
             <div className='flex flex-col lg:flex-row gap-2 justify-center bg-gray-800 p-10'>
                 <div className='rounded-md p-10 bg-white'>
-                <form onSubmit={hdlSubmit} className='flex justify-center'>
+                    <form onSubmit={hdlSubmit} className='flex justify-center'>
                         <label className="form-control w-full max-w-xs">
                             <div className="label pl-20">
                             </div>

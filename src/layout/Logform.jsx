@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import useAuth from '../Hooks/useAuth'
 import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2';
 
 export default function Logform() {
     const { setUser } = useAuth()
@@ -27,22 +28,32 @@ export default function Logform() {
     const hdlSubmit = async e => {
         try {
             e.preventDefault();
-            if (!validateForm()) return; // ตรวจสอบความถูกต้องของฟอร์มก่อนที่จะส่งคำขอ
-
+            if (!validateForm()) return;
+    
             const rs = await axios.post("http://localhost:3000/auth/login", input);
-            console.log(rs.data.token);
             localStorage.setItem("token", rs.data.token);
+    
             const localtoken = localStorage.getItem("token");
             const rs1 = await axios.get("http://localhost:3000/auth/me", {
                 headers: { Authorization: `Bearer ${localtoken}` }
             });
             delete rs1.data.Password;
-            console.log(rs1.data);
             setUser(rs1.data);
+                Swal.fire({
+                icon: 'success',
+                title: 'Login Successful',
+                text: 'คุณเข้าสู่ระบบสำเร็จแล้ว!'
+            });
         } catch (err) {
             console.log(err.message);
+                Swal.fire({
+                icon: 'error',
+                title: 'Login Failed',
+                text: 'เกิดข้อผิดพลาดขณะเข้าสู่ระบบ โปรดลองอีกครั้งในภายหลัง'
+            });
         }
     };
+    
 
     return (
         <>

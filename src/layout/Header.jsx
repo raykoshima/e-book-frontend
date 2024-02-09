@@ -4,7 +4,7 @@ import useAuth from '../Hooks/useAuth';
 import Swal from 'sweetalert2';
 
 const guestNav = [
-  { to : '/', text: 'เข้าสู่ระบบ' },
+  { to: '/', text: 'เข้าสู่ระบบ' },
   { to: '/register', text: 'สมัครสมาชิก' },
 ];
 
@@ -21,13 +21,14 @@ export default function Header() {
 
   const hdlLogout = () => {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'You will be logged out',
+      title: 'Warning!',
+      text: 'คุณแน่ใจที่จะออกจากระบบ',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, logout'
+      cancelButtonText: 'ยกเลิก',
+      confirmButtonText: 'ออกจากระบบ'
     }).then((result) => {
       if (result.isConfirmed) {
         logout();
@@ -59,7 +60,7 @@ export default function Header() {
       </div>
       <div className="navbar-center">
         <a className="btn btn-ghost text-xl">
-          {user?.id ? `ยินดีต้อนรับ, ${user.display}` : <span className="font-bold text-1xl flex gap-2"><img src="https://www.kktech.ac.th/files/bigsize_10000001_21101520200238.jpg" alt="" width="30" height="24"/>วิทยาลัยเทคนิคขอนแก่น</span>}
+          {user?.id ? `ยินดีต้อนรับ, ${user.display}` : <span className="font-bold text-1xl flex gap-2"><img src="https://www.kktech.ac.th/files/bigsize_10000001_21101520200238.jpg" alt="" width="30" height="24" />วิทยาลัยเทคนิคขอนแก่น</span>}
         </a>
       </div>
       <div className="navbar-end">
