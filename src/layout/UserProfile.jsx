@@ -1,7 +1,55 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Swal from 'sweetalert2';
 
 function UserProfile() {
+    const [formData, setFormData] = useState({
+        email: '',
+        displayname: '',
+        oldPassword: '',
+        newPassword: '',
+        confirmNewPassword: '',
+        profilepicture: ''
+    });
+
+    const handleClear = () => {
+        setFormData({
+            email: '',
+            displayname: '',
+            oldPassword: '',
+            newPassword: '',
+            confirmNewPassword: '',
+            profilepicture: ''
+        });
+    };
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const jsonData = JSON.stringify(formData);
+        axios.patch('http://localhost:3000/auth/update', jsonData, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(response => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: JSON.stringify(response.data.message)
+                }).then(() => {
+                    window.location.reload();
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    };
+
     const [user, setUser] = useState({});
 
     useEffect(() => {
@@ -25,6 +73,7 @@ function UserProfile() {
         <div className="flex flex-col lg:flex-row gap-2 justify-center bg-gray-800 p-10">
             <div className="rounded-md p-10 bg-white">
                 <div className="photo-wrapper p-2">
+                    <h1 className="flex justify-center text-xl font-bold">Edit Profile</h1><br />
                     <img className="rounded-full mx-auto" src={user.avatar} alt="avatar" width="180px" height="140px" />
                 </div>
                 <div className="p-2">
@@ -44,7 +93,7 @@ function UserProfile() {
                             </tr>
                             <tr>
                                 <td className="px-2 py-2 text-gray-500 font-semibold">Password :</td>
-                                <td className="px-2 py-2">**********</td>
+                                <td className="px-2 py-2">##########</td>
                             </tr>
                         </tbody>
                     </table>
@@ -57,55 +106,39 @@ function UserProfile() {
                     <p>หรือสิ่งหนึ่งสิ่งใดก็แล้วแต่ในลักษณะเดียวกัน</p></label>
                 <p>มีความผิดตามกฏหมาย <label className='font-bold'>ทีมงานจะระงับใช้ ID ของท่านโดยไม่มีการแจ้งให้ทราบล่วงหน้า</label></p>
                 <hr /><br />
-                <div className="flex justify-start">
-                    <form className="w-full max-w-sm">
-                        <div className="md:flex md:items-center mb-3">
-                            <div className="md:w-1/3">
-                                <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                                    ชื่อผู้ใช้
-                                </label>
+                <div className="flex justify-center">
+                    <form onSubmit={handleSubmit} className="">
+                        <div className="flex gap-2">
+                            <div className="mb-4">
+                                <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">อีเมล :</label>
+                                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                             </div>
-                            <div className="md:w-2/3">
-                                <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="username" required/>
-                            </div>
-                        </div>
-                        <div className="md:flex md:items-center mb-3">
-                            <div className="md:w-1/3">
-                                <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                                    ชื่อที่แสดง
-                                </label>
-                            </div>
-                            <div className="md:w-2/3">
-                                <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="display name" required/>
+                            <div className="mb-4">
+                                <label htmlFor="displayname" className="block text-gray-700 text-sm font-bold mb-2">ชื่อที่แสดง :</label>
+                                <input type="text" id="displayname" name="displayname" value={formData.displayname} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                             </div>
                         </div>
-                        <div className="md:flex md:items-center mb-3">
-                            <div className="md:w-1/3">
-                                <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                                    อีเมล
-                                </label>
+                        <div className="mb-4">
+                            <label htmlFor="oldPassword" className="block text-gray-700 text-sm font-bold mb-2">รหัสผ่านเก่า :</label>
+                            <input type="password" id="oldPassword" name="oldPassword" value={formData.oldPassword} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                        </div>
+                        <div className="flex gap-2">
+                            <div className="mb-4">
+                                <label htmlFor="newPassword" className="block text-gray-700 text-sm font-bold mb-2">รหัสผ่านใหม่ :</label>
+                                <input type="password" id="newPassword" name="newPassword" value={formData.newPassword} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                             </div>
-                            <div className="md:w-2/3">
-                                <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" type="email" placeholder="email" required />
+                            <div className="mb-4">
+                                <label htmlFor="confirmNewPassword" className="block text-gray-700 text-sm font-bold mb-2">ยืนยันรหัสผ่านใหม่ :</label>
+                                <input type="password" id="confirmNewPassword" name="confirmNewPassword" value={formData.confirmNewPassword} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                             </div>
                         </div>
-                        <div className="md:flex md:items-center mb-3">
-                            <div className="md:w-1/3">
-                                <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-                                    รหัสผ่าน
-                                </label>
-                            </div>
-                            <div className="md:w-2/3">
-                                <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" type="password" placeholder="password" required />
-                            </div>
+                        <div className="mb-4">
+                            <label htmlFor="profilepicture" className="block text-gray-700 text-sm font-bold mb-2">รูปโปรไฟล์ URL :</label>
+                            <input type="url" id="profilepicture" name="profilepicture" value={formData.profilepicture} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                         </div>
-                        <div className="md:flex md:items-center">
-                            <div className="md:w-1/3"></div>
-                            <div className="md:w-2/3">
-                                <button className="shadow bg-gray-500 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
-                                    บันทึกข้อมูล
-                                </button>
-                            </div>
+                        <div className="flex justify-between">
+                            <button type="button" onClick={handleClear} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">ล้างข้อมูลในฟอร์ม</button>
+                            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">บันทึกข้อมูล</button>
                         </div>
                     </form>
                 </div>
