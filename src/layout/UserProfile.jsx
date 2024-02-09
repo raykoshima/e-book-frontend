@@ -111,11 +111,11 @@ function UserProfile() {
                         <div className="flex gap-2">
                             <div className="mb-4">
                                 <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">อีเมล :</label>
-                                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                             </div>
                             <div className="mb-4">
                                 <label htmlFor="displayname" className="block text-gray-700 text-sm font-bold mb-2">ชื่อที่แสดง :</label>
-                                <input type="text" id="displayname" name="displayname" value={formData.displayname} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                                <input type="text" id="displayname" name="displayname" value={formData.displayname} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                             </div>
                         </div>
                         <div className="mb-4">
@@ -125,16 +125,16 @@ function UserProfile() {
                         <div className="flex gap-2">
                             <div className="mb-4">
                                 <label htmlFor="newPassword" className="block text-gray-700 text-sm font-bold mb-2">รหัสผ่านใหม่ :</label>
-                                <input type="password" id="newPassword" name="newPassword" value={formData.newPassword} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                                <input type="password" id="newPassword" name="newPassword" value={formData.newPassword} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                             </div>
                             <div className="mb-4">
                                 <label htmlFor="confirmNewPassword" className="block text-gray-700 text-sm font-bold mb-2">ยืนยันรหัสผ่านใหม่ :</label>
-                                <input type="password" id="confirmNewPassword" name="confirmNewPassword" value={formData.confirmNewPassword} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                                <input type="password" id="confirmNewPassword" name="confirmNewPassword" value={formData.confirmNewPassword} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                             </div>
                         </div>
                         <div className="mb-4">
                             <label htmlFor="profilepicture" className="block text-gray-700 text-sm font-bold mb-2">รูปโปรไฟล์ URL :</label>
-                            <input type="url" id="profilepicture" name="profilepicture" value={formData.profilepicture} onChange={handleChange} required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                            <input type="url" id="profilepicture" name="profilepicture" value={formData.profilepicture} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                         </div>
                         <div className="flex justify-between">
                             <button type="button" onClick={handleClear} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">ล้างข้อมูลในฟอร์ม</button>

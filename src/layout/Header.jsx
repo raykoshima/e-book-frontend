@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const guestNav = [
   { to : '/', text: 'เข้าสู่ระบบ' },
@@ -19,8 +20,20 @@ export default function Header() {
   const navigate = useNavigate();
 
   const hdlLogout = () => {
-    logout();
-    navigate('/');
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will be logged out',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, logout'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logout();
+        navigate('/');
+      }
+    });
   };
 
   return (
