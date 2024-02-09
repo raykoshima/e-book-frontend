@@ -138,6 +138,7 @@ export default function Regform() {
                     <p>3.3 ในกรณีที่สมาชิกละเมิด ฝ่าฝืน และไม่ปฎิบัติตามเงื่อนไขการให้บริการ</p>
                 </div>
             </div>
+            <div className='flex flex-col lg:flex-row gap-2 justify-center bg-gray-800 p-10'></div>
         </>
     )
 }

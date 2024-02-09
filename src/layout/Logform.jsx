@@ -107,6 +107,7 @@ export default function Logform() {
                     <p>มีความผิดตามกฏหมาย <label className='font-bold'>ทีมงานจะระงับใช้ ID ของท่านโดยไม่มีการแจ้งให้ทราบล่วงหน้า</label></p>
                 </div>
             </div>
+                <div className='flex flex-col lg:flex-row gap-2 justify-center bg-gray-800 p-10'></div>
         </>
     )
 }
