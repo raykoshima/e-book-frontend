@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth';
 
 const guestNav = [
-  // { to : '/', text: 'Login' },
+  { to : '/', text: 'เข้าสู่ระบบ' },
   { to: '/register', text: 'สมัครสมาชิก' },
 ];
 

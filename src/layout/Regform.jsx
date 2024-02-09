@@ -33,7 +33,7 @@ export default function Regform() {
         try {
             e.preventDefault();
             if (!validateForm()) return; // ตรวจสอบความถูกต้องของฟอร์มก่อนที่จะส่งคำขอ
-    
+
             const rs = await axios.post('http://localhost:3000/auth/register', input);
             console.log(rs);
             if (rs.status === 200) {
@@ -46,16 +46,16 @@ export default function Regform() {
             console.log(err.message);
         }
     };
-    
+
 
     return (
         <>
-            <div className='flex text-3xl font-bold p-3 justify-center bg-gray-800 text-white'>
+            <div className='flex text-3xl font-bold pt-20 justify-center bg-gray-800 text-white'>
                 <h1>สมัครสมาชิก</h1>
             </div>
-            <div className='flex gap-2 justify-center bg-gray-800'>
+            <div className='flex flex-col lg:flex-row gap-2 justify-center bg-gray-800 p-10'>
                 <div className='rounded-md p-10 bg-white'>
-                    <form onSubmit={hdlSubmit}>
+                <form onSubmit={hdlSubmit} className='flex justify-center'>
                         <label className="form-control w-full max-w-xs">
                             <div className="label pl-20">
                             </div>
@@ -114,7 +114,23 @@ export default function Regform() {
                         </label>
                     </form>
                 </div>
+                <div className='rounded-md p-10 bg-white'>
+                    <p className='font-bold'>นโยบาย เงื่อนไข ข้อตกลง สิทธิส่วนบุคคลสำหรับสมาชิก</p>
+                    <p className='font-bold'>1. ข้อมูลส่วนบุคคล</p>
+                    <p>1.1 สมาชิกทุกท่านจะต้องระบุข้อมูลส่วนบุคคลที่เป็นความจริง การกระทำการใดๆ จะต้องไม่ขัดต่อพระราชบัญญัติความผิดคอมพิวเตอร์ ปี 2550 ทุกประการ หากฝ่าฝืน ผู้ให้บริการ จะขอสงวนสิทธ์ในการให้ใช้บริการ</p>
+                    <p>1.2 ผู้ให้บริการ จะเก็บข้อมูลส่วนตัวของท่าน เพื่อการนำเสนอเนื้อหาและบริการ ให้ตรงกับความต้องการและ ความสนใจของคุณ เป็นหลัก</p>
+
+                    <p className='font-bold'>2. การใช้ข้อมูลสมาชิก</p>
+                    <p>ผู้ให้บริการ เปิดให้บริการฟรี แต่ข้อมูลของสมาชิก จะไม่มีการเปิดเผยไปยังกลุ่มบุคคลที่ 3 แต่ประการใด</p>
+
+                    <p className='font-bold'>3. การเปิดเผยข้อมูลต่อสาธารณะ</p>
+                    <p>ผู้ให้บริการ จะไม่เปิดเผยข้อมูลส่วนบุคคลของสมาชิก ยกเว้นในกรณีต่อไปนี้</p>
+                    <p>3.1 ผู้ให้บริการ จะเปิดเผยข้อมูลส่วนบุคคลของท่านสมาชิก ที่ท่านได้ระบุมาในข้อมูลส่วนตัว ให้กับแผนกวิชาชีพของท่าน หรือวิทยาลัยเทคนิคสัตหีบ ตามที่ ผู้ให้บริการ เห็นสมควร</p>
+                    <p>3.2 ผู้ให้บริการ มีสิทธิ์ในการเปิดเผยข้อมูลใด ๆ หากข้อมูลนั้น เป็นที่ต้องการในทางกฎหมาย โดยการเปิดเผยนั้นมีความจำเป็นต่อ - กระบวนการทางกฎหมาย - การทำตามเงื่อนไขการให้บริการ - การอ้าง – หรือเรียกร้องว่าเนื้อหานั้น ๆ ละเมิดสิทธิของผู้อื่น - การรักษาสิทธิ์ และความปลอดภัยส่วนบุคคล ของผู้ใช้บริการของเว็บไซต์ ผู้ให้บริการ</p>
+                    <p>3.3 ในกรณีที่สมาชิกละเมิด ฝ่าฝืน และไม่ปฎิบัติตามเงื่อนไขการให้บริการ</p>
+                </div>
             </div>
+
         </>
     )
 }

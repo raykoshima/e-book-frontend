@@ -46,12 +46,12 @@ export default function Logform() {
 
     return (
         <>
-            <div className='flex text-3xl font-bold p-3 justify-center bg-gray-800 text-white'>
+            <div className='flex text-3xl font-bold pt-20 justify-center bg-gray-800 text-white'>
                 <h1>เข้าสู่ระบบ</h1>
             </div>
-            <div className='flex justify-center bg-gray-800'>
+            <div className='flex flex-col lg:flex-row gap-2 justify-center bg-gray-800 p-10'>
                 <div className='rounded-md p-10 bg-white'>
-                    <form onSubmit={hdlSubmit}>
+                    <form onSubmit={hdlSubmit} className='flex justify-center'>
                         <label className="form-control w-full max-w-xs">
                             <div className="label pl-20">
                             </div>
@@ -87,6 +87,13 @@ export default function Logform() {
                             </div>
                         </label>
                     </form>
+                </div>
+                <div className='rounded-md p-10 bg-white'>
+                    <p className='font-bold'>การนำเข้าข้อมูล รูปภาพ หรือ สื่อต่างๆ</p>
+                    <label className='text-red-500 font-bold'>ที่นำเสนอแนวทางยั่วยุในกามอารมณ์ ลามกอนาจาร
+                        <p>สร้างความเดือดร้อนให้แก่ผู้อื่น สังคม ประเทศ ละเมิดลิขสิทธ์ของผู้อื่น</p>
+                        <p>หรือสิ่งหนึ่งสิ่งใดก็แล้วแต่ในลักษณะเดียวกัน</p></label>
+                    <p>มีความผิดตามกฏหมาย <label className='font-bold'>ทีมงานจะระงับใช้ ID ของท่านโดยไม่มีการแจ้งให้ทราบล่วงหน้า</label></p>
                 </div>
             </div>
         </>

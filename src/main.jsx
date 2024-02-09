@@ -4,11 +4,13 @@ import App from './App.jsx'
 import './index.css'
 import './App.css'
 import { AuthContextProvider } from './contexts/AuthContext.jsx'
+import Footer from "./layout/footer";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthContextProvider>
       <App />
+      <Footer />
     </AuthContextProvider>
   </React.StrictMode>,
 )
