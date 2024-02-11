@@ -14,9 +14,14 @@ const userNav = [
   { to: '/profile', text: 'โปรไฟล์' },
 ];
 
+const adminNav = [
+  { to: '/admin', text: 'หลังบ้าน' },
+];
+
 export default function Header() {
   const { user, logout } = useAuth();
-  const finalNav = user?.id ? userNav : guestNav;
+  const isAdmin = user?.role === '99';
+  const finalNav = isAdmin ? adminNav : user?.id ? userNav : guestNav;
   const navigate = useNavigate();
 
   const hdlLogout = () => {

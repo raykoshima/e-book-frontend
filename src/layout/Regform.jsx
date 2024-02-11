@@ -41,7 +41,8 @@ export default function Regform() {
                 Swal.fire({
                     icon: 'success',
                     title: 'Registration Successful',
-                    text: 'คุณลงทะเบียนสำเร็จแล้ว!'
+                    text: 'คุณลงทะเบียนสำเร็จแล้ว!',
+                    timer: 1500
                 }).then(() => {
                     window.location.href = '/';
                 });
@@ -81,7 +82,7 @@ export default function Regform() {
 
                             <div className="join flex items-center">
                                 <label className="btn join-item"><i className="fa-solid fa-envelope"></i></label>
-                                <input className="input input-bordered join-item" placeholder="อีเมล"
+                                <input className="input input-bordered join-item" required placeholder="อีเมล"
                                     name="email"
                                     value={input.email}
                                     onChange={hdlChange} />

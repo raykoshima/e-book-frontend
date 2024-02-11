@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import useAuth from '../Hooks/useAuth'
-import { Link } from 'react-router-dom'
+import { Link, redirect } from 'react-router-dom'
 import Swal from 'sweetalert2';
 
 export default function Logform() {
@@ -29,31 +29,36 @@ export default function Logform() {
         try {
             e.preventDefault();
             if (!validateForm()) return;
-    
+
             const rs = await axios.post("http://localhost:3000/auth/login", input);
             localStorage.setItem("token", rs.data.token);
-    
+
             const localtoken = localStorage.getItem("token");
             const rs1 = await axios.get("http://localhost:3000/auth/me", {
                 headers: { Authorization: `Bearer ${localtoken}` }
             });
             delete rs1.data.Password;
             setUser(rs1.data);
-                Swal.fire({
+            Swal.fire({
                 icon: 'success',
                 title: 'Login Successful',
-                text: 'คุณเข้าสู่ระบบสำเร็จแล้ว!'
-            });
+                text: 'คุณเข้าสู่ระบบสำเร็จแล้ว!',
+                timer: 1500
+            }).then(()=> {
+                if(rs1.data.role === 99){
+                    console.log('role 99 success')
+                    window.location = "/admin"
+                }});
+                
         } catch (err) {
             console.log(err.message);
-                Swal.fire({
+            Swal.fire({
                 icon: 'error',
                 title: 'Login Failed',
                 text: 'เกิดข้อผิดพลาดขณะเข้าสู่ระบบ โปรดลองอีกครั้งในภายหลัง'
             });
         }
     };
-    
 
     return (
         <>
@@ -107,7 +112,7 @@ export default function Logform() {
                     <p>มีความผิดตามกฏหมาย <label className='font-bold'>ทีมงานจะระงับใช้ ID ของท่านโดยไม่มีการแจ้งให้ทราบล่วงหน้า</label></p>
                 </div>
             </div>
-                <div className='flex flex-col lg:flex-row gap-2 justify-center bg-gray-800 p-10'></div>
+            <div className='flex flex-col lg:flex-row gap-2 justify-center bg-gray-800 p-10'></div>
         </>
     )
 }

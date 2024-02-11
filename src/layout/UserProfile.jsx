@@ -40,7 +40,8 @@ function UserProfile() {
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
-                    text: JSON.stringify(response.data.message)
+                    text: JSON.stringify(response.data.message),
+                    timer: 1500
                 }).then(() => {
                     window.location.reload();
                 });
@@ -94,6 +95,10 @@ function UserProfile() {
                             <tr>
                                 <td className="px-2 py-2 text-gray-500 font-semibold">Password :</td>
                                 <td className="px-2 py-2">##########</td>
+                            </tr>
+                            <tr>
+                                <td className="px-2 py-2 text-gray-500 font-semibold">Role :</td>
+                                <td className="px-2 py-2">{user.role}</td>
                             </tr>
                         </tbody>
                     </table>
