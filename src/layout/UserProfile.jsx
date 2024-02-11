@@ -70,38 +70,54 @@ function UserProfile() {
         fetchData();
     }, []);
 
+    const handleEditProfile = () => {
+        setFormData({
+            email: user.Email,
+            displayname: user.display,
+            profilepicture: user.avatar,
+            oldPassword: '',
+            newPassword: '',
+            confirmNewPassword: '',
+        });
+    };
+
     return (
         <div className="flex flex-col lg:flex-row gap-2 justify-center bg-gray-800 p-10">
             <div className="rounded-md p-10 bg-white">
                 <div className="photo-wrapper p-2">
-                    <h1 className="flex justify-center text-xl font-bold">Edit Profile</h1><br />
+                    <h1 className="flex justify-center text-xl font-bold">แก้ไขโปรไฟล์</h1><br />
                     <img className="rounded-full mx-auto" src={user.avatar} alt="avatar" width="180px" height="140px" />
                 </div>
                 <div className="p-2">
                     <h3 className="text-center text-xl text-gray-900 font-medium leading-8">{user.Username}</h3>
                     <div className="text-center text-gray-400 text-xs font-semibold">
-                        <p>Diaplay Name : {user.display}</p>
+                        <p>ชื่อที่แสดง : {user.display}</p>
                     </div>
                     <table className="text-xs my-3 flex justify-center">
                         <tbody>
                             <tr>
-                                <td className="px-2 py-2 text-gray-500 font-semibold">User ID :</td>
+                                <td className="px-2 py-2 text-gray-500 font-semibold">ไอดี :</td>
                                 <td className="px-2 py-2">{user.id}</td>
                             </tr>
                             <tr>
-                                <td className="px-2 py-2 text-gray-500 font-semibold">Email :</td>
+                                <td className="px-2 py-2 text-gray-500 font-semibold">อีเมล :</td>
                                 <td className="px-2 py-2">{user.Email}</td>
                             </tr>
                             <tr>
-                                <td className="px-2 py-2 text-gray-500 font-semibold">Password :</td>
+                                <td className="px-2 py-2 text-gray-500 font-semibold">รหัสผ่าน :</td>
                                 <td className="px-2 py-2">##########</td>
                             </tr>
                             <tr>
-                                <td className="px-2 py-2 text-gray-500 font-semibold">Role :</td>
+                                <td className="px-2 py-2 text-gray-500 font-semibold">บทบาท :</td>
                                 <td className="px-2 py-2">{user.role}</td>
                             </tr>
                         </tbody>
                     </table>
+                    <div className="flex gap-1 justify-center">
+                        <button className="btn" onClick={handleEditProfile}>
+                            แก้ไขข้อมูล<i className="fa-regular fa-pen-to-square"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             <div className='rounded-md p-10 bg-white'>
