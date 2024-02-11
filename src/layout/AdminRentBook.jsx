@@ -4,7 +4,7 @@ import axios from "axios";
 import useAuth from '../Hooks/useAuth';
 import Swal from 'sweetalert2';
 
-export default function Admin() {
+export default function AdminRentBook() {
     const { user } = useAuth();
     const navigate = useNavigate();
 

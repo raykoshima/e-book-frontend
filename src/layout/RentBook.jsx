@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function UserHome() {
+export default function RentBook() {
     const [todos, setTodos] = useState([]);
 
     useEffect(() => {

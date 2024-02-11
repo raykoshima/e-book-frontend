@@ -6,7 +6,7 @@ import Header from '../layout/Header'
 import RentBook from '../layout/RentBook'
 import Dashboard from '../layout/Dashboard'
 import UserProfile from '../layout/UserProfile'
-import Admin from '../layout/admin'
+import RentBookAdmin from '../layout/AdminRentBook'
 
 const guestRouter = createBrowserRouter([
     {
@@ -33,7 +33,7 @@ const userRouter = createBrowserRouter([
             { index: true, element: <Dashboard/> },
             { path: '/rentbook', element: <RentBook/> },
             { path: '/profile', element: <UserProfile/> },
-            { path: '/admin', element: <Admin/> },
+            { path: '/rentBookAdmin', element: <RentBookAdmin/> },
         ]
     }
 ])

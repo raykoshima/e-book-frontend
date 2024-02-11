@@ -16,7 +16,7 @@ const userNav = [
 
 const adminNav = [
   { to: '/users', text: 'ผู้ใช้งาน' },
-  { to: '/admin', text: 'หน้าหลัก' },
+  { to: '/rentbookAdmin', text: 'หน้าหลัก' },
   { to: '/profile', text: 'โปรไฟล์' },
 ];
 

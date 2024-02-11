@@ -47,7 +47,7 @@ export default function Logform() {
             }).then(()=> {
                 if(rs1.data.role === 99){
                     console.log('role 99 success')
-                    window.location = "/admin"
+                    window.location = "/rentBookAdmin"
                 }});
                 
         } catch (err) {
