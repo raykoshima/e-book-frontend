@@ -111,6 +111,10 @@ function UserProfile() {
                                 <td className="px-2 py-2 text-gray-500 font-semibold">บทบาท :</td>
                                 <td className="px-2 py-2">{user.role}</td>
                             </tr>
+                            <tr>
+                                <td className="px-2 py-2 text-gray-500 font-semibold">วันที่สร้างไอดี :</td>
+                                <td className="px-2 py-2">{new Date(user.createdAt).toLocaleDateString()}</td>
+                            </tr>
                         </tbody>
                     </table>
                     <div className="flex gap-1 justify-center">

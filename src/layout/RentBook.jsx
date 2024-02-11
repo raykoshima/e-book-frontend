@@ -63,7 +63,7 @@ export default function RentBook() {
                                         <p className="flex">{todo.Title}</p>
                                     </td>
                                     <td className="px-6 py-4 text-center">
-                                        <p className="flex">{new Date(todo.createdAt).toLocaleString()}</p>
+                                        <p className="flex">{new Date(todo.createdAt).toLocaleDateString()}</p>
                                     </td>
                                     <td className="px-6 py-4 text-center">
                                         <p className="flex text-red-500 font-bold">{new Date(todo.Duedate).toLocaleDateString()}</p>

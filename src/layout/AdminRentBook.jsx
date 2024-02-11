@@ -40,71 +40,76 @@ export default function AdminRentBook() {
     }, []);
 
     return (
-        <div className="overflow-x-auto">
-            <table className="table">
-                {/* head */}
-                <thead>
-                    <tr>
-                        <th>
-                            <label>
-                                <input type="checkbox" className="checkbox" />
-                            </label>
-                        </th>
-                        <th>User ID</th>
-                        <th>Title</th>
-                        <th>Created At</th>
-                        <th>Due Date</th>
-                        <th>Status</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {rentbook.length === 0 ? (
+        <>
+            <div className="navbar bg-base-300 flex justify-end gap-2">
+                <button className="btn btn-outline btn-success">เพิ่มรายการหนังสือ</button>
+                <button className="btn btn-outline btn-error">ลบข้อมูล</button>
+            </div>
+            <div className="overflow-x-auto">
+                <table className="table">
+                    {/* head */}
+                    <thead>
                         <tr>
-                            <td colSpan="7" className="px-6 py-4">
-                                <div className="flex justify-center">
-                                    <p className="text-center italic">ไม่มีข้อมูลในรายการ</p>
-                                </div>
-                            </td>
+                            <th>
+                                <label className='flex items-center justify-center gap-1'>
+                                    <input type="checkbox" className="checkbox" />
+                                    <p>เลือกทั้งหมด</p>
+                                </label>
+                            </th>
+                            <th>ไอดี</th>
+                            <th>ชื่อหนังสือ</th>
+                            <th>วันที่ยืม</th>
+                            <th>ต้องส่งคืน</th>
+                            <th>สถานะ</th>
+                            <th>แก้ใข</th>
                         </tr>
-                    ) : (
-                        rentbook.map(book => (
-                            <tr key={book.id}>
-                                <th>
-                                    <label>
-                                        <input type="checkbox" className="checkbox" />
-                                    </label>
-                                </th>
-                                <td>
-                                    <div className="flex items-center gap-3">
-                                        <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
-                                                <img src={book.img} alt="Avatar Tailwind CSS Component" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div className="font-bold">Hart Hagerty</div>
-                                            <div className="text-sm opacity-50">United States</div>
-                                        </div>
+                    </thead>
+                    <tbody>
+                        {rentbook.length === 0 ? (
+                            <tr>
+                                <td colSpan="7" className="px-6 py-4">
+                                    <div className="flex justify-center">
+                                        <p className="text-center italic">ไม่มีข้อมูลในรายการ</p>
                                     </div>
                                 </td>
-                                <td>
-                                    Zemlak, Daniel and Leannon
-                                    <br />
-                                    <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-                                </td>
-                                <td>Purple</td>
-                                <th>
-                                    <button className="btn btn-ghost btn-xs">details</button>
-                                </th>
-                                <th>
-                                    <button className="btn btn-ghost btn-xs">{book.Status}</button>
-                                </th>
                             </tr>
-                        ))
-                    )}
-                </tbody>
-            </table>
-        </div >
+                        ) : (
+                            rentbook.map(book => (
+                                <tr key={book.id}>
+                                    <th className='flex justify-center'>
+                                        <label>
+                                            <input type="checkbox" className="checkbox" />
+                                        </label>
+                                    </th>
+                                    <td>
+                                        <div className="flex items-center gap-3">
+                                            <div className="avatar">
+                                                <div className="mask mask-squircle w-12 h-12">
+                                                    <img src={book.img} alt="Avatar Tailwind CSS Component" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="flex justify-center items-center font-bold">ID:{book.id}</div>
+                                                <div className="flex justify-center items-center text-sm opacity-50"><i className="fa-solid fa-user"></i>{book.UserID}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td className='font-bold'>{book.Title}</td>
+                                    <td>{new Date(book.createdAt).toLocaleDateString()}</td>
+                                    <td className='text-red-500'>{new Date(book.Duedate).toLocaleDateString()}</td>
+                                    <th>
+                                        <button className="btn btn-ghost btn-xs text-green-500">{book.Status}</button>
+                                    </th>
+
+                                    <th>
+                                        <button className="btn btn-outline btn-warning">Edit</button>
+                                    </th>
+                                </tr>
+                            ))
+                        )}
+                    </tbody>
+                </table>
+            </div >
+        </>
     );
 }
