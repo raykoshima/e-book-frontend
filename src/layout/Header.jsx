@@ -10,12 +10,13 @@ const guestNav = [
 
 const userNav = [
   { to: '/', text: 'หน้าหลัก' },
-  { to: '/new', text: 'รายการหนังสือที่ยืม' },
+  { to: '/rentbook', text: 'รายการหนังสือที่ยืม' },
   { to: '/profile', text: 'โปรไฟล์' },
 ];
 
 const adminNav = [
-  { to: '/admin', text: 'หลังบ้าน' },
+  { to: '/users', text: 'ผู้ใช้งาน' },
+  { to: '/admin', text: 'หน้าหลัก' },
   { to: '/profile', text: 'โปรไฟล์' },
 ];
 

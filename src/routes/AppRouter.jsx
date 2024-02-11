@@ -3,7 +3,7 @@ import Logform from '../layout/Logform'
 import Regform from '../layout/regform'
 import useAuth from '../Hooks/useAuth'
 import Header from '../layout/Header'
-import Userhome from '../layout/Userhome'
+import RentBook from '../layout/RentBook'
 import Dashboard from '../layout/Dashboard'
 import UserProfile from '../layout/UserProfile'
 import Admin from '../layout/admin'
@@ -31,7 +31,7 @@ const userRouter = createBrowserRouter([
         </>,
         children: [
             { index: true, element: <Dashboard/> },
-            { path: '/new', element: <Userhome/> },
+            { path: '/rentbook', element: <RentBook/> },
             { path: '/profile', element: <UserProfile/> },
             { path: '/admin', element: <Admin/> },
         ]

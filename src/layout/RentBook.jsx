@@ -8,7 +8,7 @@ export default function UserHome() {
         const token = localStorage.getItem('token');
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/todos", {
+                const response = await axios.get("http://localhost:3000/rentbook", {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
