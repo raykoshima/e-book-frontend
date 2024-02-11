@@ -20,6 +20,6 @@ export default function Admin() {
     }, [user, navigate]);
 
     return (
-        <div>admin : {user?.role}</div>
+        <div>Admin</div>
     );
 }
