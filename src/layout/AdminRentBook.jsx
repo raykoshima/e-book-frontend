@@ -24,14 +24,16 @@ export default function AdminRentBook() {
     const [selectAll, setSelectAll] = useState(false);
     const [selectedItems, setSelectedItems] = useState([]);
     const [searchText, setSearchText] = useState('');
+    const [loading, setLoading] = useState(false); // เพิ่ม state loading เพื่อแสดงสถานะการโหลดข้อมูล
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        
+
         let delayTimer;
-        const delay = 1000;
+        const delay = 500;
 
         const fetchData = async () => {
+            setLoading(true); // เริ่มโหลดข้อมูล
             try {
                 let url = "http://localhost:3000/rentbook/all";
                 if (searchText) {
@@ -45,11 +47,12 @@ export default function AdminRentBook() {
                 setRentBook(response.data);
             } catch (error) {
                 console.error("Error fetching Rentbook:", error);
+            } finally {
+                setLoading(false); // เมื่อโหลดเสร็จสิ้น
             }
         };
 
         const delayedFetchData = () => {
-            
             clearTimeout(delayTimer);
             delayTimer = setTimeout(fetchData, delay);
         };
@@ -63,12 +66,13 @@ export default function AdminRentBook() {
     const handleSelectAll = () => {
         setSelectAll(!selectAll);
         if (!selectAll) {
-            const allIds = rentbook.map(book => book.id);
+            const allIds = rentbook.productData.map(book => book.id);
             setSelectedItems(allIds);
         } else {
             setSelectedItems([]);
         }
     };
+    
 
     const handleSelectItem = (id) => {
         if (selectedItems.includes(id)) {
@@ -93,77 +97,77 @@ export default function AdminRentBook() {
                 <Link to="/insert" className="btn">เพิ่มรายการหนังสือ</Link>
                 <button className="btn">ลบข้อมูลที่เลือก</button>
             </div>
-            <div className="overflow-x-auto">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>
-                                <label className='flex items-center justify-center gap-1'>
-                                    <input type="checkbox" className="checkbox" checked={selectAll} onChange={handleSelectAll} />
-                                    <p>เลือกทั้งหมด</p>
-                                </label>
-                            </th>
-                            <th>ไอดี</th>
-                            <th>ชื่อหนังสือ</th>
-                            <th>วันที่ยืม</th>
-                            <th>ต้องส่งคืน</th>
-                            <th>สถานะ</th>
-                            <th>แก้ใขข้อมูล / ลบข้อมูล</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {rentbook.length === 0 ? (
+                <div className="overflow-x-auto">
+                    <table className="table">
+                        <thead>
                             <tr>
-                                <td colSpan="7" className="px-6 py-4">
-                                    <div className="flex justify-center">
-                                        <p className="text-center italic">ไม่มีข้อมูลในรายการ</p>
-                                    </div>
-                                </td>
+                                <th>
+                                    <label className='flex items-center justify-center gap-1'>
+                                        <input type="checkbox" className="checkbox" checked={selectAll} onChange={handleSelectAll} />
+                                        <p>เลือกทั้งหมด</p>
+                                    </label>
+                                </th>
+                                <th>ไอดี</th>
+                                <th>ชื่อหนังสือ</th>
+                                <th>วันที่ยืม</th>
+                                <th>ต้องส่งคืน</th>
+                                <th>สถานะ</th>
+                                <th>แก้ใขข้อมูล / ลบข้อมูล</th>
                             </tr>
-                        ) : (
-                            rentbook.map(book => (
-                                <tr key={book.id}>
-                                    <th className='flex justify-center'>
-                                        <label>
-                                            <input
-                                                type="checkbox"
-                                                className="checkbox"
-                                                checked={selectedItems.includes(book.id)}
-                                                onChange={() => handleSelectItem(book.id)}
-                                            />
-                                        </label>
-                                    </th>
-                                    <td>
-                                        <div className="flex items-center gap-3">
-                                            <div className="avatar">
-                                                <div className="mask mask-squircle w-12 h-12">
-                                                    <img src={book.img} alt="Avatar Tailwind CSS Component" />
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div className="flex justify-center items-center font-bold">ID:{book.id}</div>
-                                                <div className="flex justify-center items-center text-sm opacity-50"><i className="fa-solid fa-user"></i>{book.UserID}</div>
-                                            </div>
+                        </thead>
+                        <tbody>
+                            {rentbook.productData && rentbook.productData.length === 0 ? (
+                                <tr>
+                                    <td colSpan="7" className="px-6 py-4">
+                                        <div className="flex justify-center">
+                                            <p className="text-center italic">ไม่มีข้อมูลในรายการ</p>
                                         </div>
                                     </td>
-                                    <td className='font-bold'>{book.Title}</td>
-                                    <td>{new Date(book.createdAt).toLocaleDateString()}</td>
-                                    <td className='text-red-500'>{new Date(book.Duedate).toLocaleDateString()}</td>
-                                    <th>
-                                        <button className="btn btn-ghost btn-xs text-green-500">{book.Status}</button>
-                                    </th>
-
-                                    <th className='flex gap-3'>
-                                        <button className="btn">แก้ใขข้อมูล</button>
-                                        <button className="btn">ลบข้อมูล</button>
-                                    </th>
                                 </tr>
-                            ))
-                        )}
-                    </tbody>
-                </table>
-            </div >
+                            ) : (
+                                rentbook.productData && rentbook.productData.map(book => (
+                                    <tr key={book.id}>
+                                        <td className='flex justify-center'>
+                                            <label>
+                                                <input
+                                                    type="checkbox"
+                                                    className="checkbox"
+                                                    checked={selectedItems.includes(book.id)}
+                                                    onChange={() => handleSelectItem(book.id)}
+                                                />
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div className="flex items-center gap-3">
+                                                <div className="avatar">
+                                                    <div className="mask mask-squircle w-12 h-12">
+                                                        <img src={book.img} alt="Avatar Tailwind CSS Component" />
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div className="flex justify-center items-center font-bold">ID: {book.id}</div>
+                                                    <div className="flex justify-center items-center text-sm opacity-50"><i className="fa-solid fa-user"></i>{book.UserID}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className='font-bold'>{book.Title}</td>
+                                        <td>{new Date(book.createdAt).toLocaleDateString()}</td>
+                                        <td className='text-red-500'>{new Date(book.Duedate).toLocaleDateString()}</td>
+                                        <td>
+                                            <button className="btn btn-ghost btn-xs text-green-500">{book.Status}</button>
+                                        </td>
+
+                                        <td className='flex gap-3'>
+                                            <button className="btn">แก้ใขข้อมูล</button>
+                                            <button className="btn">ลบข้อมูล</button>
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                </div>
         </>
     );
 }
+    
