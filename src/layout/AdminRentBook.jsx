@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import useAuth from '../Hooks/useAuth';
 import Swal from 'sweetalert2';
@@ -21,12 +21,23 @@ export default function AdminRentBook() {
     }, [user, navigate]);
 
     const [rentbook, setRentBook] = useState([]);
+    const [selectAll, setSelectAll] = useState(false);
+    const [selectedItems, setSelectedItems] = useState([]);
+    const [searchText, setSearchText] = useState('');
 
     useEffect(() => {
         const token = localStorage.getItem('token');
+        
+        let delayTimer;
+        const delay = 1000;
+
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/rentbook/all", {
+                let url = "http://localhost:3000/rentbook/all";
+                if (searchText) {
+                    url = `http://localhost:3000/rentbook/search?text=${searchText}`;
+                }
+                const response = await axios.get(url, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -36,23 +47,59 @@ export default function AdminRentBook() {
                 console.error("Error fetching Rentbook:", error);
             }
         };
-        fetchData();
-    }, []);
+
+        const delayedFetchData = () => {
+            
+            clearTimeout(delayTimer);
+            delayTimer = setTimeout(fetchData, delay);
+        };
+
+        delayedFetchData();
+        return () => {
+            clearTimeout(delayTimer);
+        };
+    }, [searchText]);
+
+    const handleSelectAll = () => {
+        setSelectAll(!selectAll);
+        if (!selectAll) {
+            const allIds = rentbook.map(book => book.id);
+            setSelectedItems(allIds);
+        } else {
+            setSelectedItems([]);
+        }
+    };
+
+    const handleSelectItem = (id) => {
+        if (selectedItems.includes(id)) {
+            setSelectedItems(selectedItems.filter(itemId => itemId !== id));
+        } else {
+            setSelectedItems([...selectedItems, id]);
+        }
+    };
 
     return (
         <>
-            <div className="navbar bg-base-300 flex justify-end gap-2">
-                <button className="btn btn-outline btn-success">เพิ่มรายการหนังสือ</button>
-                <button className="btn btn-outline btn-error">ลบข้อมูล</button>
+            <div className="navbar bg-base-300 flex justify-end gap-4">
+                <div>
+                    <input
+                        type="text"
+                        className="input w-full md:w-72 border border-gray-300 rounded-md p-2"
+                        placeholder="ค้นหา..."
+                        value={searchText}
+                        onChange={(e) => setSearchText(e.target.value)}
+                    />
+                </div>
+                <Link to="/insert" className="btn">เพิ่มรายการหนังสือ</Link>
+                <button className="btn">ลบข้อมูลที่เลือก</button>
             </div>
             <div className="overflow-x-auto">
                 <table className="table">
-                    {/* head */}
                     <thead>
                         <tr>
                             <th>
                                 <label className='flex items-center justify-center gap-1'>
-                                    <input type="checkbox" className="checkbox" />
+                                    <input type="checkbox" className="checkbox" checked={selectAll} onChange={handleSelectAll} />
                                     <p>เลือกทั้งหมด</p>
                                 </label>
                             </th>
@@ -61,7 +108,8 @@ export default function AdminRentBook() {
                             <th>วันที่ยืม</th>
                             <th>ต้องส่งคืน</th>
                             <th>สถานะ</th>
-                            <th>แก้ใข</th>
+                            <th>แก้ใขข้อมูล / ลบข้อมูล</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,7 +126,12 @@ export default function AdminRentBook() {
                                 <tr key={book.id}>
                                     <th className='flex justify-center'>
                                         <label>
-                                            <input type="checkbox" className="checkbox" />
+                                            <input
+                                                type="checkbox"
+                                                className="checkbox"
+                                                checked={selectedItems.includes(book.id)}
+                                                onChange={() => handleSelectItem(book.id)}
+                                            />
                                         </label>
                                     </th>
                                     <td>
@@ -101,8 +154,9 @@ export default function AdminRentBook() {
                                         <button className="btn btn-ghost btn-xs text-green-500">{book.Status}</button>
                                     </th>
 
-                                    <th>
-                                        <button className="btn btn-outline btn-warning">Edit</button>
+                                    <th className='flex gap-3'>
+                                        <button className="btn">แก้ใขข้อมูล</button>
+                                        <button className="btn">ลบข้อมูล</button>
                                     </th>
                                 </tr>
                             ))

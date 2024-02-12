@@ -7,6 +7,7 @@ import RentBook from '../layout/RentBook'
 import Dashboard from '../layout/Dashboard'
 import UserProfile from '../layout/UserProfile'
 import RentBookAdmin from '../layout/AdminRentBook'
+import Insert from '../layout/insertRentbook'
 
 const guestRouter = createBrowserRouter([
     {
@@ -34,6 +35,7 @@ const userRouter = createBrowserRouter([
             { path: '/rentbook', element: <RentBook/> },
             { path: '/profile', element: <UserProfile/> },
             { path: '/rentBookAdmin', element: <RentBookAdmin/> },
+            { path: '/insert', element: <Insert/> },
         ]
     }
 ])
