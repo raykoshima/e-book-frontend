@@ -1,57 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from "axios";
 import Swal from 'sweetalert2';
 import useAuth from '../Hooks/useAuth';
+import axios from 'axios';
 
-function InsertRentbook() {
+function AdminRentBookEdit() {
     const { user } = useAuth();
     const navigate = useNavigate();
-    const [users, setUser] = useState({
-        title: "",
-        Image: "https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg",
-        createAt: "",
-        duedate: "",
-        status: "",
-        userID: ""
-    });
-
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                setSelectedImage(reader.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
-
-    const handleChange = (e) => {
-        setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    };
-
-    const handleClick = async (e) => {
-        e.preventDefault();
-        try {
-            await axios.post("http://localhost:3000/rentbook/insert", users, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
-            Swal.fire({
-                icon: 'success',
-                title: 'Completed.',
-                text: 'เพิ่มรายการยืมหนังสือเสร็จสิ้นโดย ' + user.display
-            });
-            setTimeout(function () {
-                window.location = "/rentBookAdmin";
-            }, 1000);
-        } catch (err) {
-            console.log(err);
-        }
-    };
+    const [rentdata, setRentData] = useState({});
 
     useEffect(() => {
         if (user.role !== 99) {
@@ -63,17 +19,38 @@ function InsertRentbook() {
             });
             navigate('/');
         }
+
+        const token = localStorage.getItem('token');
+        const fetchBook = async () => {
+            try {
+                const response = await axios.get("http://localhost:3000/rentbook/edit?id=2", {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                console.log(response.data);
+                setRentData(response.data);
+            } catch (error) {
+                console.error("Error fetching Book:", error);
+            }
+        };
+
+        fetchBook();
     }, [user, navigate]);
 
     return (
         <div className="container mx-auto px-4 pb-10">
             <div className="md:flex md:justify-center">
                 <div className="md:w-1/2">
-                    <h3 className="text-lg font-semibold mb-4">เพิ่มรายละเอียดรายการหนังสือ</h3>
+                    <h3 className="text-lg font-semibold mb-4">แก้ใขข้อมูลรายการหนังสือ</h3>
                     <form className='space-y-4'>
                         <div className="space-y-1">
+                            <label htmlFor="id" className="block text-sm text-gray-700 font-bold">ไอดีหนังสือ :</label>
+                            <input type="text" id="id" className="input w-full border border-gray-300 rounded-md" placeholder="ไอดีหนังสือ" name="id" />
+                        </div>
+                        <div className="space-y-1">
                             <label htmlFor="title" className="block text-sm text-gray-700 font-bold">ชื่อหนังสือ :</label>
-                            <input type="text" id="title" className="input w-full border border-gray-300 rounded-md" placeholder="ชื่อหนังสือ" name="title" onChange={handleChange} />
+                            <input type="text" id="title" className="input w-full border border-gray-300 rounded-md" placeholder="ชื่อหนังสือ" name="title" />
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="flex items-center justify-center w-full">
@@ -85,21 +62,21 @@ function InsertRentbook() {
                                         <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
                                         <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                                     </div>
-                                    <input id="dropzone-file" type="file" className="hidden" onChange={handleImageChange} />
+                                    <input id="dropzone-file" type="file" className="hidden" />
                                 </label>
                             </div>
                             <div>
                                 <div className='flex gap-3 items-center'>
                                     <label htmlFor="createAt" className="block text-sm font-bold text-gray-700 md:w-1/3 text-right">วันที่ยืม:</label>
-                                    <input type="date" id="createAt" className="input w-full md:w-3/4 border border-gray-300 rounded-md p-2" name="createAt" onChange={handleChange} required />
+                                    <input type="date" id="createAt" className="input w-full md:w-3/4 border border-gray-300 rounded-md p-2" name="createAt" required />
                                 </div><br />
                                 <div className='flex gap-3 items-center'>
                                     <label htmlFor="duedate" className="block text-sm font-bold text-gray-700 md:w-1/3 text-right">วันที่ส่งคืน:</label>
-                                    <input type="date" id="duedate" className="input w-full md:w-3/4 border border-gray-300 rounded-md p-2" name="duedate" onChange={handleChange} required />
+                                    <input type="date" id="duedate" className="input w-full md:w-3/4 border border-gray-300 rounded-md p-2" name="duedate" required />
                                 </div><br />
                                 <div className='flex gap-3 items-center'>
                                     <label htmlFor="status" className="block text-sm font-bold text-gray-700 md:w-1/3 text-right">สถานะ :</label>
-                                    <select id="status" className="input border border-gray-300 rounded-md w-full md:w-3/4" name="status" onChange={handleChange} required>
+                                    <select id="status" className="input border border-gray-300 rounded-md w-full md:w-3/4" name="status" required>
                                         <option value="">เลือกสถานะ</option>
                                         <option value="PENDING">PENDING</option>
                                         <option value="DOING">DOING</option>
@@ -107,22 +84,21 @@ function InsertRentbook() {
                                     </select>
                                 </div><br />
                                 <div className='flex gap-3 items-center'>
-                                    <label htmlFor="userID" className="block text-sm font-bold text-gray-700 md:w-1/3 text-right">ไอดี :</label>
-                                    <input type="text" id="userID" className="input w-full md:w-3/4 border border-gray-300 rounded-md p-2" placeholder="ไอดีผู้ใช้งาน" name="userID" onChange={handleChange} required />
+                                    <label htmlFor="UserID" className="block text-sm font-bold text-gray-700 md:w-1/3 text-right">ไอดี :</label>
+                                    <input type="text" id="UserID" className="input w-full md:w-3/4 border border-gray-300 rounded-md p-2" placeholder="ไอดีผู้ใช้งาน" name="UserID" required />
                                 </div>
                             </div>
                         </div>
 
                         <div className='flex gap-3 justify-start'>
                             <Link to="/rentbookAdmin" className="btn btn-outline">ยกเลิก</Link>
-                            <button type="submit" className="btn btn-outline btn-success" onClick={handleClick}>เพิ่มข้อมูล</button>
+                            <button type="submit" className="btn btn-primary">บันทึกข้อมูล</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
     );
 }
 
-export default InsertRentbook;
+export default AdminRentBookEdit;

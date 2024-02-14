@@ -8,6 +8,7 @@ import Dashboard from '../layout/Dashboard'
 import UserProfile from '../layout/UserProfile'
 import RentBookAdmin from '../layout/AdminRentBook'
 import Insert from '../layout/insertRentbook'
+import Edit from '../layout/AdminRentBookEdit'
 
 const guestRouter = createBrowserRouter([
     {
@@ -36,6 +37,7 @@ const userRouter = createBrowserRouter([
             { path: '/profile', element: <UserProfile/> },
             { path: '/rentBookAdmin', element: <RentBookAdmin/> },
             { path: '/insert', element: <Insert/> },
+            { path: '/edit', element: <Edit/> },
         ]
     }
 ])

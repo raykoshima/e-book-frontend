@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function RentBook() {
-    const [todos, setTodos] = useState([]);
+    const [rentbook, setRentBook] = useState([]);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -13,9 +13,9 @@ export default function RentBook() {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                setTodos(response.data);
+                setRentBook(response.data);
             } catch (error) {
-                console.error("Error fetching todos:", error);
+                console.error("Error fetching RentBook:", error);
             }
         };
         fetchData();
@@ -45,7 +45,7 @@ export default function RentBook() {
                         </tr>
                     </thead>
                     <tbody  >
-                        {todos.length === 0 ? (
+                        {rentbook.length === 0 ? (
                             <tr>
                                 <td colSpan="5" className="px-6 py-4">
                                     <div className="flex justify-center">
@@ -54,22 +54,22 @@ export default function RentBook() {
                                 </td>
                             </tr>
                         ) : (
-                            todos.map(todo => (
-                                <tr key={todo.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            rentbook.map(rentbook => (
+                                <tr key={rentbook.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td className="px-6 py-4">
-                                        <img src={todo.img} alt="image description" className="flex h-auto max-w-xs" width={70} />
+                                        <img src={rentbook.img} alt="image description" className="flex h-auto max-w-xs" width={70} />
                                     </td>
                                     <td className="px-6 py-4 text-center">
-                                        <p className="flex">{todo.Title}</p>
+                                        <p className="flex">{rentbook.Title}</p>
                                     </td>
                                     <td className="px-6 py-4 text-center">
-                                        <p className="flex">{new Date(todo.createdAt).toLocaleDateString()}</p>
+                                        <p className="flex">{new Date(rentbook.createdAt).toLocaleDateString()}</p>
                                     </td>
                                     <td className="px-6 py-4 text-center">
-                                        <p className="flex text-red-500 font-bold">{new Date(todo.Duedate).toLocaleDateString()}</p>
+                                        <p className="flex text-red-500 font-bold">{new Date(rentbook.Duedate).toLocaleDateString()}</p>
                                     </td>
                                     <td className="px-6 py-4 text-center">
-                                        <p className="flex text-red -500 font-bold">{todo.Status}</p>
+                                        <p className="flex text-red -500 font-bold">{rentbook.Status}</p>
                                     </td>
                                 </tr>
                             ))
