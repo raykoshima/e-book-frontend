@@ -8,7 +8,7 @@ export default function RentBook() {
         const token = localStorage.getItem('token');
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/rentbook", {
+                const response = await axios.get("http://localhost:3000/product/getall", {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -28,24 +28,21 @@ export default function RentBook() {
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-500">
                         <tr>
                             <th scope="col" className="px-6 py-3">
-                                <p>รูปภาพ</p>
+                                <p>Name</p>
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                <p>ชื่อหนังสือ</p>
+                                <p>Description</p>
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                <p>วันที่ยืม</p>
+                                <p>PublishDate</p>
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                <p>ต้องส่งคืน</p>
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                <p>สถานะ</p>
+                                <p>Author</p>
                             </th>
                         </tr>
                     </thead>
-                    <tbody  >
-                        {rentbook.length === 0 ? (
+                    <tbody>
+                        {rentbook && rentbook.length === 0 ? (
                             <tr>
                                 <td colSpan="5" className="px-6 py-4">
                                     <div className="flex justify-center">
@@ -54,22 +51,20 @@ export default function RentBook() {
                                 </td>
                             </tr>
                         ) : (
-                            rentbook.map(rentbook => (
-                                <tr key={rentbook.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <td className="px-6 py-4">
-                                        <img src={rentbook.img} alt="image description" className="flex h-auto max-w-xs" width={70} />
+                            // JSON.stringify(rentbook)
+                            rentbook.ProductData.map((rentbook)=>(
+                                <tr key={rentbook.id}>
+                                    <td className="px-6 py-4 text-center">
+                                        <p className="flex">{rentbook.Name}</p>
                                     </td>
                                     <td className="px-6 py-4 text-center">
-                                        <p className="flex">{rentbook.Title}</p>
+                                        <p className="flex">{rentbook.Description}</p>
                                     </td>
                                     <td className="px-6 py-4 text-center">
-                                        <p className="flex">{new Date(rentbook.createdAt).toLocaleDateString()}</p>
+                                        <p className="flex">{rentbook.PublishDate}</p>
                                     </td>
                                     <td className="px-6 py-4 text-center">
-                                        <p className="flex text-red-500 font-bold">{new Date(rentbook.Duedate).toLocaleDateString()}</p>
-                                    </td>
-                                    <td className="px-6 py-4 text-center">
-                                        <p className="flex text-red -500 font-bold">{rentbook.Status}</p>
+                                        <p className="flex">{rentbook.Author}</p>
                                     </td>
                                 </tr>
                             ))

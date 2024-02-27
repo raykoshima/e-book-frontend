@@ -54,40 +54,24 @@ export default function Header() {
 
   return (
     <div className="navbar bg-base-100">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
-          </div>
-          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-            {finalNav.map(el => (
-              <li key={el.to}>
-                <Link to={el.to} className="block px-4 py-2 text-sm text-gray-800 hover:bg-blue-200">{el.text}</Link>
-              </li>
-            ))}
-            {user?.id && (
-              <li>
-                <button onClick={hdlLogout} className="block px-4 py-2 text-sm text-gray-800 hover:bg-red-200">ออกจากระบบ</button>
-              </li>
-            )}
-          </ul>
-        </div>
+      <div className="flex-1">
+        <Link to="/" className="btn btn-ghost text-xl">raysBooks</Link>
       </div>
-      <div className="navbar-center">
-        <a className="btn btn-ghost text-xl">
-          {user?.id ? `ยินดีต้อนรับ, ${user.display}` : <span className="font-bold text-1xl flex gap-2"><img src="https://www.kktech.ac.th/files/bigsize_10000001_21101520200238.jpg" alt="" width="30" height="24" />วิทยาลัยเทคนิคขอนแก่น</span>}
-        </a>
-      </div>
-      <div className="navbar-end">
-        {user?.id ? (
-          <Link to="/profile" tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img alt="User avatar" src={user.avatar} />
-            </div>
-          </Link>
-        ) : (
-            <div  className="flex justify-center items-center gap-1 font-bold"><i className="fa-regular fa-clock"></i>{currentTime.getHours() + ':' + currentTime.getMinutes() + ':' + currentTime.getSeconds()}</div >
-        )}
+      <div className="flex-none gap-2">
+        <ul className="menu menu-horizontal px-8">
+          {/* <li><a>Link</a></li> */}
+          <li>
+            <details>
+              <summary className='pr-8'>
+                เมนู
+              </summary>
+              <ul className="p-2 bg-base-100 rounded-t-none">
+                <li><Link to="/login">เข้าสู่ระบบ</Link></li>
+                <li><Link to="/register">สมัครสมาชิก</Link></li>
+              </ul>
+            </details>
+          </li>
+        </ul>
       </div>
     </div>
   );

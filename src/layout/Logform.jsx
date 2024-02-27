@@ -3,11 +3,12 @@ import axios from 'axios'
 import useAuth from '../Hooks/useAuth'
 import { Link, redirect } from 'react-router-dom'
 import Swal from 'sweetalert2';
+import Footer from "./footer";
 
 export default function Logform() {
     const { setUser } = useAuth()
     const [input, setInput] = useState({
-        username: '',
+        email: '',
         password: ''
     })
 
@@ -17,7 +18,7 @@ export default function Logform() {
 
     const [error, setError] = useState('');
     const validateForm = () => {
-        if (!input.username.trim() || !input.password.trim()) {
+        if (!input.email.trim() || !input.password.trim()) {
             setError('โปรดกรอกชื่อผู้ใช้และรหัสผ่าน');
             return false;
         }
@@ -62,57 +63,32 @@ export default function Logform() {
 
     return (
         <>
-            <div className='flex text-3xl font-bold pt-20 justify-center bg-gray-800 text-white'>
+        <title>เข้าสู่ระบบ</title>
+            {/* <div className='flex text-3xl font-bold pt-20 justify-center bg-gray-800 text-white'>
                 <h1>เข้าสู่ระบบ</h1>
-            </div>
-            <div className='flex flex-col lg:flex-row gap-2 justify-center bg-gray-800 p-10'>
-                <div className='rounded-md p-10 bg-white'>
-                    <form onSubmit={hdlSubmit} className='flex justify-center'>
-                        <label className="form-control w-full max-w-xs">
-                            <div className="label pl-20">
+            </div> */}
+            {/* <div className='overflow-hidden h-full max-h-screen bg-zinc-800'> */}
+                <div className='flex flex-col lg:flex-row flex h-fit justify-center p-10'>
+                    <div className="container mx-auto mt-20">
+                        <form onSubmit={hdlSubmit} className="max-w-md mx-auto bg-white p-8 rounded-md shadow-md">
+                            <h2 className="text-2xl mb-6 text-center font-semibold">Sign In</h2>
+                            {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
+                            <div className="mb-4">
+                                <label htmlFor="username" className="block text-gray-700 font-medium mb-2">Email</label>
+                                <input type="email" id="email" name="email" value={input.email} onChange={hdlChange} className="border border-gray-300 px-3 py-2 rounded-md w-full focus:outline-none focus:border-blue-500" />
                             </div>
-
-                            <div className="join flex items-center">
-                                <label className="btn join-item"><i className="fa-solid fa-user"></i></label>
-                                <input className="input input-bordered join-item" placeholder="ชื่อผู้ใช้"
-                                    name="username"
-                                    value={input.username}
-                                    onChange={hdlChange} />
+                            <div className="mb-6">
+                                <label htmlFor="password" className="block text-gray-700 font-medium mb-2">Password</label>
+                                <input type="password" id="password" name="password" value={input.password} onChange={hdlChange} className="border border-gray-300 px-3 py-2 rounded-md w-full focus:outline-none focus:border-blue-500" />
                             </div>
-
-                            <div className="label">
-                            </div>
-
-                            <div className="join flex items-center">
-                                <label className="btn join-item"><i className="fa-solid fa-lock"></i></label>
-                                <input className="input input-bordered join-item" placeholder="รหัสผ่าน" type="password"
-                                    name="password"
-                                    value={input.password}
-                                    onChange={hdlChange} />
-                            </div>
-
-                            <div className="join flex items-center">
-                                {error && <div className="text-red-500">{error}</div>}
-                            </div>
-
-                            <div className='label flex justify-center'>
-                                <div className='flex gap-3'>
-                                    <Link to="/register">คุณต้องการสมัครบัญชี</Link>
-                                    <button className="btn" onChange={hdlSubmit}>เข้าสู่ระบบ</button>
-                                </div>
-                            </div>
-                        </label>
-                    </form>
+                            <button type="submit" onChange={hdlSubmit} className="bg-blue-500 text-white py-2 px-4 rounded-md w-full">Sign In</button>
+                            <p>ยังไม่มีบัญชี? <Link to="/register" className='text-sky-500'>สมัครเลย</Link></p>
+                        </form>
+                    </div>
                 </div>
-                <div className='rounded-md p-10 bg-white'>
-                    <p className='font-bold'>การนำเข้าข้อมูล รูปภาพ หรือ สื่อต่างๆ</p>
-                    <label className='text-red-500 font-bold'>ที่นำเสนอแนวทางยั่วยุในกามอารมณ์ ลามกอนาจาร
-                        <p>สร้างความเดือดร้อนให้แก่ผู้อื่น สังคม ประเทศ ละเมิดลิขสิทธ์ของผู้อื่น</p>
-                        <p>หรือสิ่งหนึ่งสิ่งใดก็แล้วแต่ในลักษณะเดียวกัน</p></label>
-                    <p>มีความผิดตามกฏหมาย <label className='font-bold'>ทีมงานจะระงับใช้ ID ของท่านโดยไม่มีการแจ้งให้ทราบล่วงหน้า</label></p>
-                </div>
-            </div>
-            <div className='flex flex-col lg:flex-row gap-2 justify-center bg-gray-800 p-10'></div>
+                <Footer />
+            {/* </div> */}
+            {/* <div className='flex flex-col lg:flex-row gap-2 justify-center bg-gray-800 p-10'></div> */}
         </>
     )
 }

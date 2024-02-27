@@ -23,7 +23,7 @@ function App() {
           aria-label="Loading Spinner"
           data-testid="loader"
         />
-        <a>Loading..</a>
+        <a> Loading..</a>
       </div>
     );
   }
