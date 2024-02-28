@@ -3,14 +3,15 @@ import Logform from '../layout/Logform'
 import Regform from '../layout/regform'
 import useAuth from '../Hooks/useAuth'
 import Header from '../layout/Header'
-import RentBook from '../layout/RentBook'
+import RentBook from '../layout/test/RentBook'
 import Dashboard from '../layout/admin/Dashboard'
-import UserProfile from '../layout/UserProfile'
+import UserProfile from '../layout/test/UserProfile'
 import RentBookAdmin from '../layout/admin/AdminRentBook'
 import Insert from '../layout/insertRentbook'
 import Edit from '../layout/admin/AdminRentBookEdit'
 import NotFound from '../layout/NotFound'
 import Showproduct from '../layout/showproduct'
+import Product from '../layout/user/product'
 
 const guestRouter = createBrowserRouter([
     {
@@ -37,6 +38,8 @@ const userRouter = createBrowserRouter([
         </>,
         children: [
             { index: true, element: <Showproduct /> },
+            { path: '/product', element: <Showproduct />},
+            { path: '/product/:id', element: <Product />},
             { path: '/rentbook', element: <RentBook/> },
             { path: '/profile', element: <UserProfile/> },
             { path: '/rentBookAdmin', element: <RentBookAdmin/> },
