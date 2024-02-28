@@ -5,23 +5,28 @@ export default function Showproduct() {
     const [rentbook, setRentBook] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(`http://localhost:3000/product/page/${currentPage}`);
-                if (response.status === 404) {
-                    setRentBook([]);
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:3000/product/page/${currentPage}`);
+            if (response.status === '404') {
+                clearRentbook();
+                console.log("got response and it error 404")
+            } else {
+                if (response.data && response.data.ProductData) {
+                    setRentBook(response.data);
                 } else {
-                    if (response.data && response.data.ProductData) {
-                        setRentBook(response.data);
-                    } else {
-                        setRentBook([]);
-                    }
+                    clearRentbook();
+                    console.log("got response and it not ProductData")
                 }
-            } catch (error) {
-                console.error("Error fetching RentBook:", error);
             }
-        };
+        } catch (error) {
+            // clearRentbook();
+            setCurrentPage(currentPage - 1);
+            // console.error("Error fetching RentBook:", error);
+        }
+    };
+
+    useEffect(() => {
         fetchData();
     }, [currentPage]);
 
@@ -34,61 +39,58 @@ export default function Showproduct() {
     const goToNextPage = () => {
         setCurrentPage(currentPage + 1);
     };
+    const clearRentbook = () => {
+        setRentBook([])
+    }
 
     return (
         <>
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg z-0">
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-500">
-                        <tr>
-                            <th scope="col" className="px-6 py-3">
-                                <p>Name</p>
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                <p>Description</p>
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                <p>PublishDate</p>
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                <p>Author</p>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
+        <title>หน้าแรก</title>
+                    <div  className="focus:outline-none">
+                        <div className="mx-auto container py-8">
+                            <div className="flex flex-wrap items-center lg:justify-between justify-center">
                         {rentbook.length === 0 ? (
-                            <tr>
-                                <td colSpan="5" className="px-6 py-4">
                                     <div className="flex justify-center">
                                         <p className="text-center italic">ไม่มีข้อมูลในรายการ</p>
                                     </div>
-                                </td>
-                            </tr>
                         ) : (
                             rentbook.ProductData.map((rentbook) => (
-                                <tr key={rentbook.id}>
-                                    <td className="px-6 py-4 text-center">
-                                        <p className="flex">{rentbook.Name}</p>
-                                    </td>
-                                    <td className="px-6 py-4 text-center">
-                                        <p className="flex">{rentbook.Description}</p>
-                                    </td>
-                                    <td className="px-6 py-4 text-center">
-                                        <p className="flex">{rentbook.PublishDate}</p>
-                                    </td>
-                                    <td className="px-6 py-4 text-center">
-                                        <p className="flex">{rentbook.Author}</p>
-                                    </td>
-                                </tr>
+                            <a href={`/product/${rentbook.id}`} key={rentbook.id}>
+                              <div className="focus:outline-none mx-2 w-72 xl:mb-0 mb-8">
+                                <div>
+                                    <img alt="person capturing an image" src="https://cdn.tuk.dev/assets/templates/classified/Bitmap (1).png"  className="focus:outline-none w-full h-44" />
+                                </div>
+                                <div className="bg-white">
+                                    <div className="p-4">
+                                        <div className="flex items-center">
+                                            <h2  className="focus:outline-none text-lg font-semibold">{rentbook.Name}</h2>
+                                            <p  className="focus:outline-none text-xs text-gray-600 pl-5">จำหน่าย {new Date(rentbook.PublishDate).toLocaleDateString()}</p>
+                                        </div>
+                                        <p  className="focus:outline-none text-xs text-gray-600 mt-2">{rentbook.Description}</p>
+                                        <div className="flex items-center justify-between py-4">
+                                            <h2  className="focus:outline-none text-indigo-700 text-xs font-semibold">${rentbook.Price}</h2>
+                                            <h3  className="focus:outline-none text-indigo-700 text-xl font-semibold"></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
                             ))
                         )}
-                    </tbody>
+                    {/* </tbody>
                 </table>
+            </div> */}
+                    </div>
+                </div>
             </div>
-            <div>
-                <button onClick={goToPreviousPage}>Previous</button>
-                <span>Page {currentPage}</span>
-                <button onClick={goToNextPage}>Next</button>
+            <div><center>
+                <button onClick={goToPreviousPage}>ก่อนหน้า</button>
+                {/* <span>| Page {currentPage} |</span> */}
+                <span> | </span>
+                <button onClick={goToNextPage}>ถัดไป</button>
+                {/* <span> | </span>
+                <button onClick={clearRentbook}>ล้าง</button> */}
+                </center>
             </div>
         </>
     );

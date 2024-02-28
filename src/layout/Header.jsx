@@ -58,6 +58,12 @@ export default function Header() {
         <Link to="/" className="btn btn-ghost text-xl">raysBooks</Link>
       </div>
       <div className="flex-none gap-2">
+        {user?.id && (
+          <>
+              <p>สวัสดี {user.Displayname}</p>
+              <p>เงินคงเหลือ {new Intl.NumberFormat().format(user.Wallet)} ฿</p>
+          </>
+        )}
         <ul className="menu menu-horizontal px-8">
           {/* <li><a>Link</a></li> */}
           <li>
@@ -65,9 +71,18 @@ export default function Header() {
               <summary className='pr-8'>
                 เมนู
               </summary>
-              <ul className="p-2 bg-base-100 rounded-t-none">
-                <li><Link to="/login">เข้าสู่ระบบ</Link></li>
-                <li><Link to="/register">สมัครสมาชิก</Link></li>
+              <ul className="p-2 bg-base-100 rounded-t-none z-50">
+              {user?.id ? (
+              <li>
+                <button onClick={hdlLogout} >ออกจากระบบ</button>
+              </li>
+            ) : (
+              <>
+              <li><Link to="/login">เข้าสู่ระบบ</Link></li>
+              <li><Link to="/register">สมัครสมาชิก</Link></li>
+              </>
+            )}
+                
               </ul>
             </details>
           </li>

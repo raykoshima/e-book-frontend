@@ -10,6 +10,7 @@ import RentBookAdmin from '../layout/admin/AdminRentBook'
 import Insert from '../layout/insertRentbook'
 import Edit from '../layout/admin/AdminRentBookEdit'
 import NotFound from '../layout/NotFound'
+import Showproduct from '../layout/showproduct'
 
 const guestRouter = createBrowserRouter([
     {
@@ -19,7 +20,7 @@ const guestRouter = createBrowserRouter([
             <Outlet />
         </>,
         children: [
-            { index: true, element: <Logform /> },
+            { index: true, element: <Showproduct /> },
             { path: '/register', element: <Regform /> },
             { path: '/login', element: <Logform />},
             { path: "*" , element : <NotFound />}
@@ -35,7 +36,7 @@ const userRouter = createBrowserRouter([
             <Outlet />
         </>,
         children: [
-            { index: true, element: <Dashboard/> },
+            { index: true, element: <Showproduct /> },
             { path: '/rentbook', element: <RentBook/> },
             { path: '/profile', element: <UserProfile/> },
             { path: '/rentBookAdmin', element: <RentBookAdmin/> },
