@@ -54,12 +54,21 @@ export default function Logform() {
                 }});
                 
         } catch (err) {
-            console.log(err.message);
-            Swal.fire({
+            // console.log(err.message);
+            if(err.message === 'Request failed with status code 404'){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login Failed',
+                    text: 'รหัสหรือชื่อผู้ใช้ไม่ถูกต้อง'
+                });  
+            }else{
+               Swal.fire({
                 icon: 'error',
                 title: 'Login Failed',
                 text: 'เกิดข้อผิดพลาดขณะเข้าสู่ระบบ โปรดลองอีกครั้งในภายหลัง'
-            });
+            }); 
+            }
+            
         }
     };
 

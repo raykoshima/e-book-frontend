@@ -36,6 +36,7 @@ function AuthContextProvider(props) {
     const logout = () => {
       setUser(null)
       localStorage.removeItem("token");
+      location.reload()
   }
 
     return (
