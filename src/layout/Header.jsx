@@ -48,6 +48,7 @@ export default function Header() {
       if (result.isConfirmed) {
         logout();
         navigate('/');
+        // navigate('/');
       }
     });
   };
@@ -65,7 +66,7 @@ export default function Header() {
           </div>
               
               <p>เงินคงเหลือ {new Intl.NumberFormat().format(user.Wallet)} ฿</p>
-              {user.Backend === 418 && 
+              {user.Backend === Number(import.meta.env.VITE_ROLE) && 
               <Link to="/backend">
               <button className="border-2 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
                 <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

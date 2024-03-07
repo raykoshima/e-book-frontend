@@ -55,7 +55,7 @@ export default function Product() {
               <div className="flex flex-col md:flex-row -mx-2">
                 <div className="md:flex-1 px-4">
                   <div className="h-64 md:h-80 rounded-lg bg-gray-100 mb-4">
-                    <img alt={product.productData.Name} src="https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg" className="focus:outline-none w-full h-full" />
+                    <img alt={product.productData.Name} src={product.productData.ImageUrl} className="focus:outline-none w-full h-full" />
                   </div>
                 </div>
                   <div className="md:flex-1 px-4">

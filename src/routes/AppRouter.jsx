@@ -4,15 +4,17 @@ import Regform from '../layout/regform'
 import useAuth from '../Hooks/useAuth'
 import Header from '../layout/Header'
 import RentBook from '../layout/test/RentBook'
-import Dashboard from '../layout/admin/Dashboard'
 import UserProfile from '../layout/test/UserProfile'
 import RentBookAdmin from '../layout/admin/AdminRentBook'
 import Insert from '../layout/insertRentbook'
 import Edit from '../layout/admin/AdminRentBookEdit'
 import NotFound from '../layout/NotFound'
-import Showproduct from '../layout/showproduct'
-import Product from '../layout/user/product'
+import Showproduct from '../layout/Showproduct'
+import Product from '../layout/user/Product'
 import Topup from '../layout/user/topup'
+import ProductManager from '../layout/admin/ProductManager'
+import BackendLanding from '../layout/admin/BackendLanding'
+import ProductEdit from '../layout/admin/ProductEdit'
 
 const guestRouter = createBrowserRouter([
     {
@@ -49,6 +51,9 @@ const userRouter = createBrowserRouter([
             { path: '/insert', element: <Insert/> },
             { path: '/edit', element: <Edit/> },
             { path: '/topup', element: <Topup />},
+            { path: '/backend', element: <BackendLanding />},
+            { path: '/backend/product', element: <ProductManager />},
+            { path: '/backend/edit', element: <ProductEdit />},
             { path: "*" , element : <NotFound />}
         ]
     }

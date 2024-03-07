@@ -13,6 +13,7 @@ export default function Showproduct() {
                 console.log("got response and it error 404")
             } else {
                 if (response.data && response.data.ProductData) {
+                    console.log(response.data.ProductData)
                     setProduct(response.data);
                 } else {
                     clearRentbook();
@@ -58,7 +59,7 @@ export default function Showproduct() {
                             <a href={`/product/${product.id}`} key={product.id}>
                               <div className="focus:outline-none mx-2 w-72 xl:mb-0 mb-8">
                                 <div>
-                                    <img alt="person capturing an image" src="https://cdn.tuk.dev/assets/templates/classified/Bitmap (1).png"  className="focus:outline-none w-full h-44" />
+                                    <img alt="person capturing an image" src={product.Image_URL}  className="focus:outline-none w-full h-44" />
                                 </div>
                                 <div className="bg-white">
                                     <div className="p-4">
@@ -85,8 +86,8 @@ export default function Showproduct() {
             </div>
             <div><center>
                 <button onClick={goToPreviousPage}>ก่อนหน้า</button>
-                {/* <span>| Page {currentPage} |</span> */}
-                <span> | </span>
+                <span>| Page {currentPage} |</span>
+                {/* <span> | </span> */}
                 <button onClick={goToNextPage}>ถัดไป</button>
                 {/* <span> | </span>
                 <button onClick={clearRentbook}>ล้าง</button> */}
