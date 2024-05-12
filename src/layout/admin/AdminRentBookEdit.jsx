@@ -23,7 +23,7 @@ function AdminRentBookEdit() {
         const token = localStorage.getItem('token');
         const fetchBook = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/rentbook/edit?id=2", {
+                const response = await axios.get("http://localhost:3001/rentbook/edit?id=2", {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

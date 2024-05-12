@@ -33,9 +33,9 @@ export default function AdminRentBook() {
 
         const fetchData = async () => {
             try {
-                let url = "http://localhost:3000/rentbook/all";
+                let url = "http://localhost:3001/rentbook/all";
                 if (searchText.length !== 0) {
-                    url = `http://localhost:3000/rentbook/search?text=${searchText}`;
+                    url = `http://localhost:3001/rentbook/search?text=${searchText}`;
                 }
                 const response = await axios.get(url, {
                     headers: {

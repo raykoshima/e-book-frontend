@@ -33,9 +33,9 @@ export default function ProductManager() {
 
         const fetchData = async () => {
             try {
-                let url = "http://localhost:3000/product/getall";
+                let url = "http://localhost:3001/product/getall";
                 if (searchText.length !== 0) {
-                    url = `http://localhost:3000/product?q=${searchText}`;
+                    url = `http://localhost:3001/product?q=${searchText}`;
                 }
                 const response = await axios.get(url, {
                     headers: {
@@ -103,7 +103,7 @@ export default function ProductManager() {
 
     const deletebook = async (id) => {
         const token = localStorage.getItem('token');
-        const del = await axios.delete(`http://localhost:3000/backend/product/delete/${id}`, {
+        const del = await axios.delete(`http://localhost:3001/backend/product/delete/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

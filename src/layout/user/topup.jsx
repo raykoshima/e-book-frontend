@@ -16,7 +16,7 @@ export default function topup() {
         try {
             e.preventDefault();
             const token = localStorage.getItem('token');
-            const rs = await axios.post('http://localhost:3000/topup', input, {
+            const rs = await axios.post('http://localhost:3001/topup', input, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -45,7 +45,7 @@ export default function topup() {
     const showHistory = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get("http://localhost:3000/topup/me", {
+            const response = await axios.get("http://localhost:3001/topup/me", {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

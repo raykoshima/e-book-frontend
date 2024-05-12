@@ -35,7 +35,7 @@ export default function ProductEdit() {
     const fetchData = async () => {
         try {
             const id = searchParams.get("id")
-            const response = await axios.get(`http://localhost:3000/product/id/${id}`);
+            const response = await axios.get(`http://localhost:3001/product/id/${id}`);
             if (response.status === 404) {
                 // clearRentbook();
                 // console.log("got response and it error 404")
@@ -66,7 +66,7 @@ export default function ProductEdit() {
             e.preventDefault();
             const localtoken = localStorage.getItem("token");
             const id = searchParams.get("id")
-            const editdata = await axios.patch(`http://localhost:3000/backend/product/update/${Number(id)}`, product , {
+            const editdata = await axios.patch(`http://localhost:3001/backend/product/update/${Number(id)}`, product , {
                 headers: { Authorization: `Bearer ${localtoken}` }
             });
             if(editdata.status !== 200){

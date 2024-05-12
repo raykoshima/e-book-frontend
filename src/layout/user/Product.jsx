@@ -8,7 +8,7 @@ export default function Product() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/product/id/${id}`);
+            const response = await axios.get(`http://localhost:3001/product/id/${id}`);
             if (response.status === '404') {
                 // clearRentbook();
                 // console.log("got response and it error 404")

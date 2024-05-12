@@ -30,7 +30,7 @@ function UserProfile() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const jsonData = JSON.stringify(formData);
-        axios.patch('http://localhost:3000/auth/update', jsonData, {
+        axios.patch('http://localhost:3001/auth/update', jsonData, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -57,7 +57,7 @@ function UserProfile() {
         const token = localStorage.getItem('token');
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/user", {
+                const response = await axios.get("http://localhost:3001/user", {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

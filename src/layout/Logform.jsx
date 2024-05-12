@@ -31,11 +31,11 @@ export default function Logform() {
             e.preventDefault();
             if (!validateForm()) return;
 
-            const rs = await axios.post("http://localhost:3000/auth/login", input);
+            const rs = await axios.post("http://localhost:3001/auth/login", input);
             localStorage.setItem("token", rs.data.token);
 
             const localtoken = localStorage.getItem("token");
-            const rs1 = await axios.get("http://localhost:3000/auth/me", {
+            const rs1 = await axios.get("http://localhost:3001/auth/me", {
                 headers: { Authorization: `Bearer ${localtoken}` }
             });
             delete rs1.data.Password;

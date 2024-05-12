@@ -36,7 +36,7 @@ export default function Regform() {
             e.preventDefault();
             if (!validateForm()) return;
 
-            const rs = await axios.post('http://localhost:3000/auth/register', input);
+            const rs = await axios.post('http://localhost:3001/auth/register', input);
             console.log(rs);
             if (rs.status === 201) {
                 Swal.fire({

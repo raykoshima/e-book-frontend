@@ -8,7 +8,7 @@ export default function RentBook() {
         const token = localStorage.getItem('token');
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/product/getall", {
+                const response = await axios.get("http://localhost:3001/product/getall", {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
